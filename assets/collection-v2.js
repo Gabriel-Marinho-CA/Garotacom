@@ -319,7 +319,7 @@
           collection.filterMapClear();
           hidePopup('.loading');
           hidePopup('.filter-to-left , .js-bg');
-		  
+          console.log("@@@@@@@@ sucess")
         },
 
         error: function(xhr, text) {
