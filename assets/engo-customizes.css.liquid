@@ -17671,7 +17671,7 @@ body.cartover {
     text-align: center;
     font-size: 20px;
     font-weight: 400;
-    color: {{ settings.color_main }};
+    color: {{ settings.color_main | default: '#000'}};
     text-transform: unset;
     padding-top: 20px
 }
