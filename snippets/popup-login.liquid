@@ -35,17 +35,17 @@
               <a href="#recover" class="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
               {% endif %}
             </div>
-            <button type="submit" class="btn btn-dark w-100" value="{{ 'customer.login.log_in' | t }}">
-              {{ 'customer.login.log_in' | t }}
+            <button type="submit" class="btn btn-dark w-100" value="Entrar">
+              Entrar
             </button>
             {% endform %}
           </div>
 
           <div class="or_creat my-3">
             {% if settings.enable_rtl_mode %}
-            <div class="box-register"><a href="javascript:void(0)" class="jsCreate_account"><i class="mr-2 ti-arrow-left"></i>{{ 'customer.account.register_now' | t }} </a><span class="or-register ml-2">{{ 'customer.login.title-2' | t }}</span></div>
+            <div class="box-register"><a href="javascript:void(0)" class="jsCreate_account"><i class="mr-2 ti-arrow-left"></i>{{ 'customer.account.register_now' | t }} </a><span class="or-register ml-2">Cadastrar-se</span></div>
             {% else %}
-            <div class="box-register"><span class="or-register mr-2">{{ 'customer.login.title-2' | t }}</span><a href="javascript:void(0)" class="jsCreate_account">{{ 'customer.account.register_now' | t }} <i class="ml-2 ti-arrow-right"></i></a></div>
+            <div class="box-register"><span class="or-register mr-2">Cadastrar-se</span><a href="javascript:void(0)" class="jsCreate_account">{{ 'customer.account.register_now' | t }} <i class="ml-2 ti-arrow-right"></i></a></div>
             {% endif %}
           </div>
         </div>
