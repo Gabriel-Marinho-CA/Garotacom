@@ -23,7 +23,7 @@
             {% form 'customer_login' %}
             {{ form.errors | default_errors }}
             <div class="form-group">
-              <input type="email"  class="form-control" name="customer[email]"  placeholder="{{ 'customer.login.email' | t }}" required>
+              <input type="email"  class="form-control" name="customer[email]"  placeholder="Digite seu email" required>
             </div>
             {% if form.password_needed %}
             <div class="form-group">
@@ -65,7 +65,7 @@
             <h2 class="title_resgister title24 text-center title-form-account">{{ 'customer.recover_password.title' | t }}</h2>
             <div class="form-group mb-0 row">
               <div class="col-sm-12">
-                <input type="email" class="form-control" placeholder="{{ 'customer.login.email' | t }}" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>
+                <input type="email" class="form-control" placeholder="Digite seu email" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>
               </div>
             </div>
             <div class="text-center">
