@@ -1,0 +1,136 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{ section.settings.sections_bg_color }};{% endif %}">
+  <div class="section-collection-v2 mt-all">
+    <div class="container container-v2">
+      {% if section.settings.title_heading != blank %}
+      <h3 class="title_heading text-center" style="color : {{ section.settings.color_title }}">{{ section.settings.title_heading }}</h3>
+      {% endif %}
+      <div class="row no-gutters js-collection-v2">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == 'colection' %}
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 col-item">
+          <div class="item">
+            <div class="box-img">
+              <a href="{{ block.settings.brand_url }}" title="{{ block.settings.title_collection }}">
+                {% if block.settings.brand_img != blank %}
+                <img loading="lazy" width="" height="" data-src="{{ block.settings.brand_img | image_url }}" class="lazyload img-fluid w-100" alt="_img_collection">
+                {% else %}
+                <img loading="lazy" width="" height="" data-src="//via.placeholder.com/456x456" class="lazyload img-fluid w-100" alt="_img_collection">
+                {% endif %}
+              </a>
+            </div>
+            <div class="category-info">
+              <div class="box-info">
+                {% if block.settings.title_collection != blank %}
+                <a href="{{ block.settings.brand_url }}" class="title-collection">{{ block.settings.title_collection }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %} 
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "COLLECTION V2",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "header",
+      "content": "Settings Collection v2"
+    },
+    {
+      "type": "text",
+      "id": "title_heading",
+      "label": "Title heading",
+      "default": "Get 20% Off"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "colection",
+      "name": "Item Collection v2",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "info": "456 x 456px recommended",
+          "label": "Collection 1"
+        },
+        {
+          "type": "text",
+          "id": "title_collection",
+          "label": "Label Collection",
+          "default": "New Collection"
+        },
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL collection",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "COLLECTION V2",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Porcelain"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Bone China"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Earthenware"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

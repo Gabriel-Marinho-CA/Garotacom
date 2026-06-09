@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js p-0" {% if settings.enable_rtl_mode %} dir="rtl"{% endif %} > <!--<![endif]-->
+<head>
+
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title and description ================================================== -->
+  <title>
+    {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Helpers ================================================== -->
+  {% include 'social-meta-tags' %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.m_primary_color }}">
+  <link rel="icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" sizes="16x16">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- font -->
+  {% include 'engo-header-fonts' %}
+  <!-- CSS ================================================== -->
+  {% if settings.po_style == "po_swatchs" %}
+  {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {% if settings.po_style == "po_dropdown" %}
+  {{ 'timber_2.scss.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+
+  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'jquery.fancybox.min.css' | asset_url }}" media="nope!" onload="this.media='all'">
+  {{ 'style-main.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'engo-customizes.css' | asset_url | stylesheet_tag }}
+  {{ 'animate.min.css' | asset_url | stylesheet_tag }}
+  {% if template == 'cart' or template == 'checkout' %}
+  {{ 'matteusdev.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {% if template == 'cart' %}
+  {{ 'snapcart-overrides.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+  {% include 'oldIE-js' %}
+  <script src="{{ 'jquery-3.5.0.min.js' | asset_url }}" type="text/javascript" async></script>
+  <script src="{{ 'api.jquery.js' | shopify_asset_url }}" type="text/javascript" async></script>
+  <script src="{{ 'modernizr-2.8.3.min.js' | asset_url }}" type="text/javascript" async></script>
+  <script src="{{ 'option_selection.js' | shopify_asset_url }}" type="text/javascript" async></script>
+  <script src="{{ 'lazysizes.min.js' | asset_url }}" type="text/javascript" async></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{{ 'matteusdev.js' | asset_url }}" type="text/javascript" async></script>
+
+
+      {{ '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js' | script_tag }}
+      {{ '/services/javascripts/countries.js' | script_tag }}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+      {{ 'jquery.cart.min.js' | asset_url | script_tag }}
+
+  <script>
+    window.ajax_cart = true;
+    window.money_format = '{{ shop.money_with_currency_format }}';
+    window.shop_currency = '{{ shop.currency }}';
+    window.show_multiple_currencies = true;
+    window.loading_url = "{{ 'loader.gif' | asset_url }}";
+    window.use_color_swatch = true;
+    window.product_image_resize = true;
+    window.enable_sidebar_multiple_choice = true;
+
+    window.file_url = "{{ '' | file_url }}";
+    window.asset_url = "{{ '' | asset_url }}";
+    window.images_size = {
+      is_crop: true,
+      ratio_width : 1,
+      ratio_height : 1,
+    };
+    window.inventory_text = {
+      in_stock: "{{ 'products.product.in_stock' | t }}",
+      many_in_stock: "{{ 'products.product.many_in_stock' | t }}",
+      out_of_stock: "{{ 'products.product.out_of_stock' | t }}",
+      add_to_cart: "{{ 'products.product.add_to_cart' | t }}",
+      sold_out: "{{ 'products.product.sold_out' | t }}",
+      unavailable: "{{ 'products.product.unavailable' | t }}"
+    };
+
+    window.sidebar_toggle = {
+      show_sidebar_toggle: "{{ 'general.sidebar_toggle.show_sidebar_toggle' | t }}",
+      hide_sidebar_toggle: "{{ 'general.sidebar_toggle.hide_sidebar_toggle' | t }}"
+    };
+
+  </script>
+
+  {% comment %}
+  If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+  {% comment %}theme-check-disable ParserBlockingScriptTag{% endcomment %}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% comment %}theme-check-enable ParserBlockingScriptTag{% endcomment %}
+  {% endif %}
+
+  {% include 'social-meta-tags' %}
+
+{{ 'custom-styles.css' | asset_url | stylesheet_tag }}
+</head>
+{% comment %}
+Add the page template as a class for easy page or template specific styling.
+{% endcomment %}
+<body class="{% if settings.enable_rtl_mode %}rtl{% endif %} preload push_filter_left js_overhidden relative" {% if settings.bg_color_body != blank %}style="background: {{settings.bg_color_body }};"{% endif %}>
+
+  <div class="wrap">
+    <div class="contentbody">
+      <!-- hidden banner used on the cart drawer only -->
+      <div class="cart-content-list cart-content-banner promo-banner d-none"><div class="cart-banner">
+        <img src="https://cdn.shopify.com/s/files/1/0759/6553/0357/files/CUPOMGAROTA10.png?v=1758060061"></div>
+        </div>
+
+      {% if settings.enable_promo_topbar %}
+      {% include 'promo-topbar' %}
+      {% endif %}
+      {% section 'header' %}
+
+      <!-- HEADING HIDDEN SEO -->
+      {% if template contains 'index' %}
+      <h1 class="sr-only">{{ shop.name }}</h1>
+      {% endif %}
+
+      {% include 'search' %}
+      {% include 'minicart' %}
+      {% include 'menu_mobile' %}
+      {% include 'popup-login' %}
+      {{ content_for_layout }}
+
+      {% section 'footer' %}
+
+    </div>
+  </div>
+  
+  {% if settings.ena_back_to_top %}
+  <a href="javascript:void(0)" class="back-to-top"> 
+    <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.0802641 5.1485L0.526264 5.5885C0.577331 5.63877 0.646111 5.66694 0.717764 5.66694C0.789416 5.66694 0.858196 5.63877 0.909264 5.5885L4.40926 2.1385L4.40926 16.7325C4.40979 16.8035 4.43837 16.8714 4.48876 16.9214C4.53915 16.9714 4.60727 16.9995 4.67826 16.9995H5.30926C5.34459 16.9998 5.37962 16.9931 5.41236 16.9798C5.4451 16.9665 5.4749 16.9469 5.50006 16.9221C5.52523 16.8973 5.54526 16.8678 5.55902 16.8353C5.57278 16.8028 5.58 16.7678 5.58026 16.7325L5.58026 2.1385L9.08026 5.5885C9.13133 5.63877 9.20011 5.66694 9.27176 5.66694C9.34342 5.66694 9.4122 5.63877 9.46326 5.5885L9.90926 5.1485C9.93433 5.12393 9.95424 5.0946 9.96783 5.06223C9.98143 5.02986 9.98843 4.99511 9.98843 4.96C9.98843 4.9249 9.98143 4.89015 9.96783 4.85778C9.95424 4.82541 9.93433 4.79608 9.90926 4.7715L5.18526 0.113504C5.1342 0.063242 5.06542 0.0350723 4.99376 0.0350723C4.92211 0.0350723 4.85333 0.063242 4.80226 0.113504L0.0802641 4.7715C0.0551984 4.79608 0.0352865 4.82541 0.0216932 4.85778C0.00809999 4.89015 0.00109863 4.9249 0.00109863 4.96C0.00109863 4.99511 0.00809999 5.02986 0.0216932 5.06223C0.0352865 5.0946 0.0551984 5.12393 0.0802641 5.1485Z" fill="#3A3A3A"/>
+    </svg>
+  </a>
+  {% endif %}
+
+
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  console.warn("[FRETE] Script iniciado");
+
+
+  const form2HTML = `
+    <div id="shipping-calculator-2" class="shipping-calculator-box">
+        
+        <div class="inner_ship">
+            <p class="field">
+                <input type="text" id="address_zip_2" placeholder="Digite seu CEP" maxlength="9" />
+            </p>
+            <p class="field">
+                <input type="button" class="get-rates-2 btn button" value="Calcular frete" />
+            </p>
+        </div>
+
+        <div id="wrapper-response-2"></div>
+    </div>
+
+    <script id="shipping-calculator-response-template-2" type="text/template">
+      <p id="shipping-rates-feedback-2" <% if (success) { %> class="success" <% } else { %> class="error" <% } %>>
+        <% if (success) { %>
+          <% if (rates.length > 1) { %> 
+            Existem <%- rates.length %> opções de frete para <%- address %>, a partir de <%= rates[0].price %>.
+          <% } else if (rates.length == 1) { %>
+            Há uma opção de frete disponível para <%- address %>.
+          <% } else { %>
+            Não enviamos para este destino.
+          <% } %>
+        <% } else { %>
+          <%- errorFeedback %>
+        <% } %>
+      </p>
+      <ul id="shipping-rates-2">
+        <% for (var i=0; i<rates.length; i++) { %>
+          <li><%- rates[i].name %> - <%= rates[i].price %></li>
+        <% } %>
+      </ul> 
+    <\/script>
+  `;
+
+  let formInjected = false; 
+
+
+  
+  function initShippingCalculator({ zipInputSelector, buttonSelector, wrapperSelector, templateSelector }) {
+
+      const zipInput = document.querySelector(zipInputSelector);
+      const calcButton = document.querySelector(buttonSelector);
+      const wrapper = document.querySelector(wrapperSelector);
+
+      if (!zipInput || !calcButton || !wrapper) {
+        console.warn("[FRETE] Aguardando elementos do formulário...");
+        return;
+      }
+
+      console.warn("[FRETE] Inicializando formulário 2");
+
+     
+      zipInput.addEventListener('input', e => {
+          e.target.value = e.target.value
+              .replace(/\D/g, '')
+              .replace(/(\d{5})(\d)/, '$1-$2')
+              .substr(0, 9);
+      });
+
+      calcButton.addEventListener('click', async function () {
+          const cep = zipInput.value.replace(/\D/g, '');
+
+          if (cep.length !== 8) {
+              wrapper.innerHTML = '<p class="error">Por favor, insira um CEP válido.</p>';
+              return;
+          }
+
+          wrapper.innerHTML = '<p>Buscando endereço e calculando frete...</p>';
+
+          try {
+
+              const viaCep = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+              const data = await viaCep.json();
+
+              if (data.erro) {
+                  wrapper.innerHTML = '<p class="error">CEP não encontrado.</p>';
+                  return;
+              }
+
+              const country = "Brazil";
+              const province = data.uf || '';
+              const city = data.localidade || '';
+              const address = `${city} - ${province}`;
+
+              const prepare = await fetch('/cart/prepare_shipping_rates.json', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                      shipping_address: { zip: cep, country, province }
+                  })
+              });
+
+              if (!prepare.ok) throw new Error('Erro ao iniciar cálculo.');
+
+              async function getRates() {
+                  const res = await fetch(`/cart/async_shipping_rates.json?shipping_address[zip]=${cep}`);
+                  const ratesData = await res.json();
+
+                  if (ratesData.status && ratesData.status !== 'ready') {
+                      wrapper.innerHTML = '<p>Calculando frete...</p>';
+                      return new Promise(resolve => setTimeout(() => resolve(getRates()), 1200));
+                  }
+
+                  return ratesData;
+              }
+
+              const rates = await getRates();
+
+              if (!rates.shipping_rates?.length) {
+                  wrapper.innerHTML = '<p class="error">Nenhuma opção de frete encontrada.</p>';
+                  return;
+              }
+
+              const context = {
+                  success: true,
+                  rates: rates.shipping_rates.map(rate => ({
+                      name: rate.name,
+                      price: Shopify.formatMoney(rate.price, "{{ shop.money_format }}")
+                  })),
+                  address
+              };
+
+              const template = document.querySelector(templateSelector).innerHTML;
+              wrapper.innerHTML = _.template(template)(context);
+
+          } catch (err) {
+              console.error(err);
+              wrapper.innerHTML = '<p class="warn">Aguarde ou clique em Calcular Frete.</p>';
+              querySelector('.get-rates-2').click();
+              
+          }
+      });
+  }
+
+
+
+
+  
+  const observer = new MutationObserver(() => {
+      const target = document.querySelector('.wizz-shipping-rate-wrapper');
+
+      if (target && !formInjected) {
+          console.warn("[FRETE] Target encontrado. Inserindo formulário 2...");
+
+
+          document.querySelector('.wizz-shipping-rate-icon').style.display = 'none';
+          document.querySelector('.wizz-shipping-rate-title').style.display = 'none';
+
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = form2HTML;
+
+          target.parentNode.insertBefore(tempDiv, target);
+
+          formInjected = true;
+
+
+          
+          setTimeout(() => {
+              initShippingCalculator({
+                  zipInputSelector: '#address_zip_2',
+                  buttonSelector: '.get-rates-2',
+                  wrapperSelector: '#wrapper-response-2',
+                  templateSelector: '#shipping-calculator-response-template-2'
+              });
+          }, 200);
+      }
+  });
+
+
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+
+});
+</script>
+
+
+
+
+<style>
+.shipping-calculator-box {
+  max-width: 360px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+.shipping-calculator-box input[type="text"] {
+  width: 160px;
+  padding: 6px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.shipping-calculator-box .btn {
+  padding: 6px 12px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#shipping-rates-2 li { margin-bottom: 6px; }
+#shipping-rates-feedback-2.success { color: #2e7d32; }
+#shipping-rates-feedback-2.error { color: #c62828; }
+#shipping-rates-feedback-2.warn { color:rgb(230, 176, 0); }
+
+
+
+
+
+div#shipping-calculator-2 {
+    width: 100%;
+    max-width: none;
+    padding: 10px;
+    margin-bottom: 5%;
+    background: #f7f7f7;
+}
+
+div#shipping-calculator-2 .inner_ship {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+div#shipping-calculator-2 .inner_ship .field{
+    /* width: 100%; */
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: center;
+    /* align-content: center; */
+}
+
+#shipping-calculator-2 input#address_zip_2 {
+    padding: 5px;
+    border: 1px solid;
+}
+
+
+
+#shipping-calculator-2 input.get-rates-2 {
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor:pointer;
+}
+
+
+div#wrapper-response-2 {
+    margin-top: 2%;
+    padding: 0 15px;
+}
+
+p#shipping-rates-feedback-2 {
+    margin: 3% auto;
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="{{ 'fastclick.js' | asset_url }}" type="text/javascript" defer></script>
+  {% include 'currencies' %}
+  <script src="{{ 'timber.js' | asset_url }}" type="text/javascript" defer></script>
+
+  {% comment %}
+  Template-specific js
+  {% endcomment %}
+  <script>
+    {% assign resetPassword = '' %}
+    {% if resetPassword %}
+    $(function() {
+      timber.resetPasswordSuccess();
+    });
+    {% endif %}
+  </script>
+
+  <script>
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+      });
+    });
+  </script>
+
+  {% if settings.ajax_cart_method == "drawer" %}
+  <script src="{{ 'handlebars.min.js' | asset_url }}" type="text/javascript" defer></script>
+  {% include 'ajax-cart-template' %}
+  <script src="{{ 'ajax-cart.js' | asset_url }}" type="text/javascript" defer></script>
+  <script>
+    var ajaxCartConfig = {
+      cartContainer: '.enj-minicart-ajax',
+      addToCartSelector: '.enj-add-to-cart-btn',
+      cartCountSelector: '.enj-cartcount',
+      cartCostSelector: '.enj-cartcost',
+      moneyFormat: {{ shop.money_format | json }}
+    };
+      jQuery(function($) {
+      ajaxCart.init(ajaxCartConfig);
+    });
+
+    jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
+      // Bind to 'ajaxCart.afterCartLoad' to run any javascript after the cart has loaded in the DOM
+      /*   timber.RightDrawer.open(); */
+    });
+  </script>
+  {% endif %}
+
+  {% if template contains 'contact' %}
+  <script src="{{ 'gmaps.min.js' | asset_url }}" type="text/javascript" defer></script>
+  {% endif %}
+
+  <script src="{{ 'bootstrap.bundle.min.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'slick.min.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'instafeed.min.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'jquery.fancybox.min.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'engo-plugins.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'quickview.js' | asset_url }}" type="text/javascript" defer></script>
+  {% comment %}
+  {{ 'wish-list.js' | asset_url | script_tag }}
+  {% endcomment %}
+  <script src="{{ 'collection.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'engo-scripts.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'masonry.pkgd.min.js' | asset_url }}" type="text/javascript" defer></script>
+
+  {% include 'template-popup' %}
+  {% include 'template-popup-ajax-addtocart' %}
+
+  {% include 'linked-options' %}
+  {% include 'remove-sold-out' %}
+  {% if settings.ena_popup_cookie %}
+  {% include 'popup-cookie' %}
+  {% endif %}
+
+  {% include 'popup-product-random' %}
+
+  {% if settings.show_menu_toolbar %}
+  {% include 'menu-toolbar' %}
+  {% endif %}
+
+  {% if settings.ena_popup_news %}
+  {% if template contains 'index' %}
+  {% include 'popup-newletter' %}
+  {% endif %}
+  {% endif %}
+
+  {% if template contains 'product' %}
+  <script>
+    jQuery(document).ready(function($) {
+      if($(window).width() > 1024){
+        $(window).scroll(function(){
+          if ($(window).scrollTop() >= 100) {
+            $('.sticky_addcart').addClass('active'); 
+            $('.popup_random_prod').addClass('active'); 
+            $('.popup-cookie').addClass('active'); 
+
+          }
+          else {
+            $('.sticky_addcart').removeClass('active');
+            $('.popup_random_prod').removeClass('active');
+
+            $('.popup-cookie').removeClass('active');
+          }
+        });
+      }
+    });
+
+    jQuery(document).ready(function($) {
+
+      if($(window).width() < 576){
+
+
+
+        if($('.popup-cookie').length){
+          $('.popup_random_prod').css('bottom','208px');
+        }
+        else{
+          $('.popup_random_prod').css('bottom','0px');
+        }
+        $('.got_it').on('click', function() {
+          $('.popup_random_prod').css('bottom','0px');
+
+        }); 
+
+
+
+        $(window).scroll(function(){
+          if ($(window).scrollTop() >= 300) {
+            $('.sticky_addcart').addClass('active'); 
+            $('.popup-cookie').css('bottom','114px');
+            $('.menu_toolbar').addClass('active'); 
+            $('.got_it').on('click', function() {
+              $('.popup_random_prod').css('bottom','114px');
+
+            }); 
+
+            if($('.popup-cookie').length){
+              $('.popup_random_prod').css('bottom','323px');
+            }
+            else{
+              $('.popup_random_prod').css('bottom','114px');
+            }
+            if($('.popup-cookie').hasClass('d-none')){
+              $('.popup_random_prod').css('bottom','114px');
+            }
+
+          }
+          else {
+            $('.menu_toolbar').removeClass('active');
+            $('.sticky_addcart').removeClass('active');
+            $('.popup-cookie').css('bottom','0px');
+            if($('.popup-cookie').length){
+              $('.popup_random_prod').css('bottom','208px');
+            }
+            else{
+              $('.popup_random_prod').css('bottom','0px');
+            }
+            if($('.popup-cookie').hasClass('d-none')){
+              $('.popup_random_prod').css('bottom','0px');
+            }
+          }
+        });
+      }
+    });
+  </script>
+  {% endif %}
+
+  {% unless template contains 'product' %}
+  <script>
+    jQuery(document).ready(function($) {
+      if($(window).width() < 577){
+
+        if($('.popup-cookie').length){
+          $('.popup_random_prod').css('bottom','208px');
+        }
+        else{
+          $('.popup_random_prod').css('bottom','0px');
+        }
+        $('.got_it').on('click', function() {
+          $('.popup_random_prod').css('bottom','0px');
+
+        }); 
+
+
+        $(window).scroll(function(){
+
+          if ($(window).scrollTop() >= 300) {
+            $('.menu_toolbar').addClass('active'); 
+            $('.popup_random_prod').css('bottom','260px');
+            $('.popup-cookie').css('bottom','50px');
+            $('.got_it').on('click', function() {
+              $('.popup_random_prod').css('bottom','50px');
+            });
+
+            if($('.popup-cookie').length){
+              $('.popup_random_prod').css('bottom','258px');
+            }
+            else{
+              $('.popup_random_prod').css('bottom','50px');
+            }
+
+            if($('.popup-cookie').hasClass('d-none')){
+              $('.popup_random_prod').css('bottom','50px');
+            }
+          }
+          else {
+
+            if($('.popup-cookie').length){
+              $('.popup_random_prod').css('bottom','208px');
+            }
+            else{
+              $('.popup_random_prod').css('bottom','0px');
+            }
+            if($('.popup-cookie').hasClass('d-none')){
+              $('.popup_random_prod').css('bottom','0px');
+            }
+            $('.menu_toolbar').removeClass('active');
+            $('.popup-cookie').css('bottom','0px');
+
+          }
+        });
+      }
+    });
+  </script>
+  {% endunless %}
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

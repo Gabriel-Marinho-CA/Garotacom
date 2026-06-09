@@ -1,0 +1,221 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{ section.settings.sections_bg_color }};{% endif %}">
+  <div class="section-collection-v1 mt-all"> 
+    <div class="container container-v2">
+      <div class="row collection-wrap">
+        <div class="col-md-4 col-12 banner-left {% if section.settings.select_pos == 'left' %} order-lg-1 {% elsif section.settings.select_pos == 'right'%} order-lg-2  {% endif %}">
+          <div class="banner-wrap">
+            <div class="box-img">
+              {% if section.settings.img_banner1 != blank %}
+              <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner1 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% else %}
+              <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/463x615" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% endif %}
+            </div>
+            <div class="banner-content">
+              <div class="info">
+                {% if section.settings.sub_title1 != blank %}
+                <p class="title-top">{{section.settings.sub_title1}}</p>
+                {% endif %}
+                {% if section.settings.title_banner1 != blank %}
+                <h3 class="title-banner">{{section.settings.title_banner1}}</h3>
+                {% endif %}
+                {% if section.settings.btn_banner1 != blank %}
+                <a href="{{section.settings.url_banner1}}" class="btn-banner">{{section.settings.btn_banner1}}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-12 collection-right {% if section.settings.select_pos == 'left' %} order-lg-2  {% elsif section.settings.select_pos == 'right'%} order-lg-1 {% endif %}">
+          <div class="row no-gutters js-collection-v1"> 
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% if block.type == 'colection' %}
+            <div class="col-item">
+              <div class="box-img">
+                <a href="{{ block.settings.brand_url }}" title="{{ block.settings.title_collection }}">
+                  {% if block.settings.brand_img != blank %}
+                  <img loading="lazy" width="" height="" data-src="{{ block.settings.brand_img | image_url }}" class="lazyload img-fluid w-100" alt="_img_collection">
+                  {% else %}
+                  <img loading="lazy" width="" height="" data-src="//via.placeholder.com/456x456" class="lazyload img-fluid w-100" alt="_img_collection">
+                  {% endif %}
+                </a>
+              </div>
+              <div class="item-title">
+                {% if block.settings.title_collection != blank %}
+                <a href="{{block.settings.brand_url}}" class="title-collection">{{block.settings.title_collection}}</a>
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %} 
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "COLLECTION V1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_pos",
+      "label": "Select Position Content",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+	{
+      "type": "header",
+      "content": "Setting banner left"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": "Image",
+      "info": "463 x 615px recommended"
+    },
+    {
+      "type": "text",
+      "id": "sub_title1",
+      "label": "Sub Title",
+      "default": "UP TO 30% OFF"
+    },
+    {
+      "type": "text",
+      "id": "title_banner1",
+      "label": "Title",
+      "default": "Summer Style"
+    },
+    {
+      "type": "text",
+      "id": "btn_banner1",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url_banner1",
+      "label": "URL banner 1",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "colection",
+      "name": "Item Collection v1",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "info": "250 x 250px recommended",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title_collection",
+          "label": "Label Collection",
+          "default": "New Collection"
+        },
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL collection",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "COLLECTION V1",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        },	
+		{
+          "type": "colection",
+          "settings": {
+            "title_collection": "New Collection"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

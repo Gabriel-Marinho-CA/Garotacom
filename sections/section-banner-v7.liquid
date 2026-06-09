@@ -1,0 +1,98 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v7" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v7"> 
+    <div class="container container-v1">
+      <div class="relative banner-v7 " style="background-image: url({% if section.settings.img_banner != blank %}{{ section.settings.img_banner | image_url }} {% else %} //via.placeholder.com/1920x700{% endif %})">
+        <div class="content-banner">
+          {% if section.settings.title_banner != blank %}
+          <h3 class="title-banner" style="color: {{section.settings.color_title}}">{{section.settings.title_banner}}</h3>
+          {% endif %}
+          {% if section.settings.content_banner != blank %}
+          <p class="content" style="color: {{section.settings.color_content_banner}}">{{section.settings.content_banner}}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-banner-v7 .banner-v7 .content-banner .button-banner-{{ section.id }} {
+    color: {{section.settings.color_btn}};
+    background: {{section.settings.bg_btn}};
+  }
+  .section-banner-v7 .banner-v7 .content-banner  .button-banner-{{ section.id }}:hover {
+    color: {{section.settings.color_btn_hover}};
+    background: {{section.settings.bg_btn_hover}};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BANNER V7",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 7"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Background Image",
+      "info": "1920 x 700px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_banner",
+      "label": "Title Banner",
+      "default": "Rewards just for shopping!"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "content_banner",
+      "label": "Content Banner",
+      "default": "Don’t forget to opt into Fashion News to have your offers and rewards delivered right to your inbox!"
+    },
+    {
+      "type": "color",
+      "id": "color_content_banner",
+      "label": "Color Contnet",
+      "default": "#000"
+    }    
+    
+  ],
+  "presets": [
+    {
+      "name": "BANNER V7",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

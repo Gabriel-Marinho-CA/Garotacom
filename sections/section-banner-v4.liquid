@@ -1,0 +1,150 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v4" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v4 mt-all">
+    <div class="container container-v2">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="content-small">
+            {% if section.settings.img_banner != blank %}
+            <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner | image_url }}" class="lazyload img-fluid w-100" alt >
+            {% else %}
+            <img loading="lazy" width="" height="" data-src="//via.placeholder.com/370x450" class="lazyload img-fluid w-100" alt>
+            {% endif %}
+
+            {% if section.settings.button_banner2 != blank %}
+            <a href="{{ section.settings.url_banner }}" class="button" title="">{{ section.settings.button_banner2 }}</a>
+            {% endif %}
+
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="content-small">
+            {% if section.settings.img_banner2 != blank %}
+            <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner2 | image_url }}" class="lazyload img-fluid w-100" alt >
+            {% else %}
+            <img loading="lazy" width="" height="" data-src="//via.placeholder.com/370x450" class="lazyload img-fluid w-100" alt>
+            {% endif %}
+
+            {% if section.settings.button_banner3 != blank %}
+            <a href="{{ section.settings.url_banner }}" class="button" title="">{{ section.settings.button_banner3 }}</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-4" style=" display: flex; align-items: center;">
+          <div class="content">
+            {% if section.settings.title_banner != blank %}
+            <h3 class="title-banner" style="color: {{ section.settings.color_sub_title }}">{{ section.settings.title_banner }}</h3>
+            {% endif %}
+            {% if section.settings.sub_title_banner != blank %}
+            <p class="sub-title " style="color: {{ section.settings.color_title }}">{{ section.settings.sub_title_banner }}</p>
+            {% endif %}
+
+            {% if section.settings.button_banner != blank %}
+            <a href="{{ section.settings.url_banner }}" class="button-shop button-shop-{{ section.id }}" title="">{{ section.settings.button_banner }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .section-banner-v4 .button-shop-{{ block.id }} {
+    color: {{ block.settings.color_url }};
+  }
+  .section-banner-v4 .button-shop-{{ block.id }}:hover {
+    color: {{ block.settings.color_url_hover }};
+  }
+  .section-banner-v4 .button-shop:before {
+  border: 1px solid {{ block.settings.color_url }};
+  }
+  .section-banner-v4 .button-shop:hover:before {
+    border-color: {{ block.settings.color_url_hover }};
+  }
+</style>
+{% schema %}
+{
+  "name": "BANNER V4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 1"
+    },
+    {
+      "type": "text",
+      "id": "title_banner",
+      "label": "Title Banner",
+      "default": "Get your Fashion style"
+    },
+    {
+      "type": "text",
+      "id": "sub_title_banner",
+      "label": "Sub Title Banner",
+      "default": "You’ll always be in fashion with our collection of clothing"
+    },
+    {
+      "type": "text",
+      "id": "button_banner",
+      "label": "Button Banner ",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image Banner",
+      "info": "960 x 624px recommended"
+    },
+    {
+      "type": "text",
+      "id": "button_banner2",
+      "label": "Button Banner 2",
+      "default": "Women's"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image Banner 2",
+      "info": "960 x 624px recommended"
+    },
+    {
+      "type": "text",
+      "id": "button_banner3",
+      "label": "Button Banner 3",
+      "default": "Men's"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V4",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

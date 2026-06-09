@@ -1,0 +1,200 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v11" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v11 mt-all">
+    <div class="container container-v2">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 col-sm-12 {% if section.settings.select_pos == 'left' %} order-lg-1 {% elsif section.settings.select_pos == 'right'%} order-lg-2  {% endif %}">
+                <div class="banner-ver">
+                    <div class="banner-item">
+                        <div class="sub-title">
+                            <p class="sub_title" style="color : {{ section.settings.color_sub_title }}">{{ section.settings.sub_title1 }}</p>
+                          </div>
+                      	<div class="slick-side-1">  
+                      	{% if section.blocks.size > 0 %}
+                        {% for block in section.blocks %}
+                        {% if block.type == "item" %}
+                        <div class="itemv-slide-11">
+                        <a href="{{ section.settings.url_banner1 }}" class="d-block box-img">
+                            <img loading="lazy" width="" height="" data-src="{% if block.settings.img_banner1 != blank %} {{ block.settings.img_banner1 | image_url }} {% else %} //via.placeholder.com/400x550 {% endif %}" class="lazyload img-fluid w-100" alt="_img_banner">
+                        </a>
+                          </div>
+                      	{% endif %}
+                        {% endfor %}
+                        {% endif %}
+                      </div>
+                      <div class="content">
+                            <h3 class="title-heading" style="color : {{ section.settings.color_title }}">{{ section.settings.title_heading1 }}</h3>
+                            {% if section.settings.button_banner != blank %}
+                            <a href="{{ section.settings.url_banner }}" class="button-shop button-shop-{{ section.id }}" title="">{{ section.settings.button_banner }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 col-sm-12 {% if section.settings.select_pos == 'left' %} order-lg-2  {% elsif section.settings.select_pos == 'right'%} order-lg-1 {% endif %}">
+                <a href="{{ section.settings.url_banner2 }}" class="d-block box-img img" style="margin: 190px 81px 0 170px;">
+                	<img loading="lazy" width="" height="" data-src="{% if section.settings.img_banner2 != blank %} {{ section.settings.img_banner2 | image_url }} {% else %} //via.placeholder.com/334x334 {% endif %}" class="lazyload img-fluid w-100" alt="_img_banner">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+  .section-banner-v11 .item-banner .content-banner h3 .title-banner-{{ section.id }} {
+    color: {{ section.settings.color_title }};
+  }
+  .section-banner-v11 .item-banner .content-banner h3 .title-banner-{{ section.id }}:hover {
+    color: {{ section.settings.color_title_hover }};
+    transition: all .3s;
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "BANNER V11",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_pos",
+      "label": "Select Position Content",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "bg_section_color",
+      "label": "Background color",
+      "default": "#e9e9e9"
+    },
+    {
+      "type": "color",
+      "id": "color_heading",
+      "label": "Color",
+      "default": "#222"
+    },
+    {
+      "type": "text",
+      "id": "sub_title1",
+      "label": "Sub Title",
+      "default": "Best Seller Product This Week!"
+    },
+    {
+      "type": "color",
+      "id": "color_sub_title",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Setting banner 1"
+    },
+    {
+      "type": "text",
+      "id": "title_heading1",
+      "label": "Title section",
+      "default": "Best Seller"
+    },
+    {
+      "type": "header",
+      "content": "Setting banner 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image",
+      "info": "473 x 504px recommended"
+    },
+    {
+      "type": "url",
+      "id": "url_banner2",
+      "label": "URL banner 2",
+      "default": "/collections/all"
+    },
+    {
+      "type": "url",
+      "id": "url_banner",
+      "label": "URL banner",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_banner",
+      "label": "Button Banner 1",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Settings Color Banner"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "color_title_hover",
+      "label": "Color Title Hover",
+      "default": "#000"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Position Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_banner1",
+          "label": "Image",
+          "info": "473 x 504px recommended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V11",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,347 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-info-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{ section.settings.sections_bg_color }};{% endif %}">
+  <div class="section-info-v1" style="{% if section.settings.style_bg == 'color' %}background: {{ section.settings.bg_color }}{% else %}background-image: url({% if section.settings.bg_img != blank %}{{ section.settings.bg_img | image_url }}{% else %}//placehold.it/1920x800{% endif %}){% endif %};">
+    <div class="container container-v2">
+      <div class="text-center" style=" margin-bottom: 40px;">
+        {% if section.settings.section_sub_title != blank %}
+        <div class="sub-title">{{ section.settings.section_sub_title }}</div>
+        {% endif %}
+        
+        {% if section.settings.section_title != blank %}
+        <div class="title-heading">{{ section.settings.section_title }}</div>
+        {% endif %}
+
+      </div>
+      <div class="row mini-content">
+        <div class="col-lg-4 col-md-12 col-12 order-lg-1 order-1 order-md-1 col-md-6 text-lg-right text-md-center pt-lg-5 text-center">
+
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == "Info" %}
+          <div class="info-banner">
+            <div class="content">
+              {% if block.settings.mini_title_left != blank %}
+              <h4 class="mini-title mini-title-{{ block.id }}" style="{{ block.settings.color_mini_title }}">
+                {{ block.settings.mini_title_left }}
+              </h4>
+              {% endif %}
+
+              {% if block.settings.mini_des_left != blank %}
+              <p class="mini-des mini-des-{{ block.id }}" style="{{ block.settings.color_mini_des }}">
+                {{ block.settings.mini_des_left }}
+              </p>
+              {% endif %}
+            </div>
+            <div class="mini-img">
+              {% if block.settings.img_content_left != blank %}
+              <img loading="lazy" width="" height="" src="{{ block.settings.img_content_left | image_url }}" alt="banner" />
+              {% else %}
+              <img loading="lazy" width="" height="" src="//via.placeholder.com/80x85">
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+
+
+
+        </div>
+        <div class="col-lg-4 order-md-2 order-2 order-lg-2 col-md-12 text-md-center col-12 pb-4  pb-lg-0 text-center image-banner">
+          <a href="" class="adv-thumb-link">
+            {% if section.settings.banner_img != blank %}
+            <img loading="lazy" width="" height="" src="{{ section.settings.banner_img | image_url }}" alt="banner" />
+            {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}	
+            {% endif %}
+          </a>
+
+        </div>
+        <div class="col-lg-4 text-lg-left col-md-12 order-md-3 order-3 order-lg-3 col-md-6 text-md-center pt-lg-5 col-12 text-center">
+
+
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == "Info-2" %}
+          <div class="info-banner">
+            <div class="mini-img">
+              {% if block.settings.img_content_right != blank %}
+              <img loading="lazy" width="" height="" src="{{ block.settings.img_content_right | image_url }}" alt="banner" />
+              {% else %}
+              <img loading="lazy" width="" height="" src="//via.placeholder.com/80x85">
+              {% endif %}
+
+            </div>
+            <div class="content">
+              {% if block.settings.mini_title_right != blank %}
+              <h4 class="mini-title mini-title-{{ block.id }}">
+                {{ block.settings.mini_title_right }}
+              </h4>
+              {% endif %}
+
+              {% if block.settings.mini_des_right != blank %}
+              <p class="mini-des mini-des-{{ block.id }}">
+                {{ block.settings.mini_des_right }}
+              </p>
+              {% endif %}
+            </div>
+          </div>
+
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<style>
+  {% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+  {% if block.type == "Info-2" %}
+  .section-info-v1 .mini-content .mini-title-{{ block.id }} {
+    color:{{ block.settings.color_mini_title }};
+  }
+  .section-info-v1 .mini-content .mini-title-{{ block.id }}:hover {
+    color:{{ block.settings.color_hover_mini_title }};
+  }
+  .section-info-v1 .mini-content .mini-des-{{ block.id }}{
+    color:{{ block.settings.color_mini_des }};
+  }
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+  {% if block.type == "Info" %}
+  .section-info-v1 .mini-content .mini-title-{{ block.id }} {
+    color:{{ block.settings.color_mini_title }};
+  }
+  .section-info-v1 .mini-content .mini-title-{{ block.id }}:hover {
+    color:{{ block.settings.color_hover_mini_title }};
+  }
+  .section-info-v1 .mini-content .mini-des-{{ block.id }} {
+    color:{{ block.settings.color_mini_des }};
+  }
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "INFO V1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "radio",
+      "id": "style_bg",
+      "label": "Style Background",
+      "options": [
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Background image",
+      "info": "1920 x 1483px recommended"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f2f2f2"
+    },
+    {
+      "type": "header",
+      "content": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "section_sub_title",
+      "label": "Description",
+      "default": "Food Is Always Fresh"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "We Grow Best Food"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "info": "514 x 572px recommended",
+      "label": "Image Banner"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Info",
+      "name": "Infomation-left",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img_content_left",
+          "info": "27 x 27px recommended",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "mini_title_left",
+          "label": "Mini Title Left",
+          "default": "Fresh"
+        },
+        {
+          "type": "color",
+          "id": "color_mini_title",
+          "label": "Color Title",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_hover_mini_title",
+          "label": "Color Hover Title",
+          "default": "#000"
+        },
+        {
+          "type": "text",
+          "id": "mini_des_left",
+          "label": "Mini Description Left",
+          "default": "This is example content"
+        },
+        {
+          "type": "color",
+          "id": "color_mini_des",
+          "label": "Color Sub",
+          "default": "#222"
+        }
+      ]
+    },
+    {
+      "type": "Info-2",
+      "name": "Infomation-right",
+      "settings": [
+        {
+          "type": "url",
+          "id": "banner_url",
+          "label": "URL",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_content_right",
+          "info": "27 x 27px recommended",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "mini_title_right",
+          "label": "Mini Title Right",
+          "default": "Fresh"
+        },
+        {
+          "type": "color",
+          "id": "color_mini_title",
+          "label": "Color Title",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_hover_mini_title",
+          "label": "Color Hover Title",
+          "default": "#000"
+        },
+        {
+          "type": "text",
+          "id": "mini_des_right",
+          "label": "Mini Description Right",
+          "default": "This is example content"
+        },
+        {
+          "type": "color",
+          "id": "color_mini_des",
+          "label": "Color Sub",
+          "default": "#222"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "INFO V1",
+      "category": "INFO",
+      "blocks": [
+        {
+          "type": "Info",
+          "settings": {
+          }
+        },
+        {
+          "type": "Info",
+          "settings": {
+          }
+        },
+        {
+          "type": "Info",
+          "settings": {
+          }
+        },
+        {
+          "type": "Info-2",
+          "settings": {
+          }
+        },
+        {
+          "type": "Info-2",
+          "settings": {
+          }
+        },
+        {
+          "type": "Info-2",
+          "settings": {
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,313 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% for block in section.blocks %}
+{% if block.type == "slideshow" %}
+  {% if block.settings.fonts_sub_1 != blank %}
+      <link href="https://fonts.googleapis.com/css2?family={{ block.settings.fonts_sub_1 }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_sub_2 != blank %}
+      <link href="https://fonts.googleapis.com/css2?family={{ block.settings.fonts_sub_2 }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_button != blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{ block.settings.fonts_button }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+{% endif %}
+{% endfor %}
+
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slideshow-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{ section.settings.sections_bg_color }};{% endif %}">
+  <div class="section-slideshow-v2">
+    <div class="slick-side-h2">       
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.type == "slideshow" %}
+      <div class="itemv-slide-h2">
+        <div class="container container-full">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-md-6 px-0 item-change">
+              <div class="info-sideh2_1 info_slide">
+                <div class="picture-slideshow">
+                  {% if block.settings.block_banerimage_1 != blank %}
+                  <a href="{{ block.settings.block_url }}">
+                    <img loading="lazy" width="" height="" class="w-100" src="{{ block.settings.block_banerimage_1 | image_url }}" class="img-responsive img_slideh2" alt="">
+                  </a>
+                  {% else %}
+                  <img loading="lazy" width="" height="" class="w-100" src="//via.placeholder.com/960x900" class="img-responsive img_slideh2" alt="slideshow">
+                  {% endif %}
+                </div>
+                <div class="box-info">
+                  <div class="box-content">
+                    {% if block.settings.block_title_top_1 != blank %}
+                    <h3 href="{{ block.settings.block_url }}" class="title1 title-{{ block.id }}">{{ block.settings.block_title_top_1 }}</h3>
+                    {% endif %}
+                    {% if block.settings.block_content_1 != blank %}
+                    <p class="content-{{ block.id }}">{{ block.settings.block_content_1 }}</p>
+                    {% endif %}
+
+                    {% if block.settings.block_buton != blank %}
+                    <a class="mt-lg-4 mt-0  button-shop button-shop-{{ block.id }} " href="{{ block.settings.block_url }}">
+                      {{ block.settings.block_buton }}
+                    </a>
+                    {% endif %}
+                  </div>
+
+                </div>              
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-md-6 px-0">
+              <div class="info-sideh2_2 info_slide">
+                <div class="picture-slideshow">
+                  {% if block.settings.block_banerimage_2 != blank %}
+                  <a href="{{ block.settings.block_url_2 }}">
+                    <img loading="lazy" width="" height="" class="w-100" src="{{ block.settings.block_banerimage_2 | image_url }}" class="img-responsive img_slideh2" alt="">
+                  </a>
+                  {% else %}
+                  <img loading="lazy" width="" height="" class="w-100" src="//via.placeholder.com/960x900" class="img-responsive img_slideh2" alt="slideshow">
+                  {% endif %}
+                </div>             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+<style>
+  {% for block in section.blocks %}
+  {% if block.type == 'slideshow' %}
+  
+  .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .button-shop-{{ block.id }}{
+    color:{{ block.settings.color_block_button }}; 
+    background-color : {{ block.settings.bgcolor_block_button }};
+    {% if block.settings.fonts_button != blank %}
+    font-family: '{{ block.settings.fonts_button }}';
+      {% endif %}
+  }
+  
+  .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .button-shop-{{ block.id }}:hover{
+    background-color: {{ block.settings.bgcolor_block_button_hover }} !important;
+    color:{{ block.settings.color_hover_button }} !important;
+  }
+  
+  .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .title-{{ block.id }}{
+    color:{{ block.settings.color_block_title_top_1 }};
+    {% if block.settings.fonts_sub_1 != blank %}
+    font-family: '{{ block.settings.fonts_sub_1 }}';
+      {% endif %}
+  }
+  
+  .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .content-{{ block.id }}{
+    color:{{ block.settings.color_block_content_1 }};
+    {% if block.settings.fonts_sub_2 != blank %}
+    	font-family: '{{ block.settings.fonts_sub_2 }}';
+    {% endif %}
+  }
+  
+  @media(min-width:1900px){
+    .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .button-shop-{{ block.id }}{
+      font-size:{{ block.settings.font_size_button }}px;
+    }
+    .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .title-{{ block.id }}{
+      font-size:{{ block.settings.font_size_top1 }}px;
+    }
+    .section-slideshow-v2 .itemv-slide-h2 .info_slide .box-info .box-content .content-{{ block.id }}{
+      font-size:{{ block.settings.font_size_top2 }}px; 
+    }
+  }
+  
+  {% endif %}
+  {% endfor %}
+</style>
+{% schema %}
+{
+  "name": "SLIDESHOW V2",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slideshow",
+      "name": "SlideShow",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_banerimage_1",
+          "label": "Image Slideshow 1",
+          "info": "960 x 900px recommended"
+        },
+        {
+          "type": "header",
+          "content": "Heading sideshow"
+        },
+        {
+          "type": "text",
+          "id": "block_title_top_1",
+          "label": "Heading",
+          "default": "Super"
+        },
+        {
+          "type": "color",
+          "id": "color_block_title_top_1",
+          "label": "Color",
+          "default": "#333333"
+        },
+        {
+          "type": "range",
+          "id": "font_size_top1",
+          "min": 50,
+          "max": 120,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 65
+        },
+        {
+          "type": "text",
+          "id": "fonts_sub_1",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "header",
+          "content": "Subheading Sideshow"
+        },
+        {
+          "type": "textarea",
+          "id": "block_content_1",
+          "label": "Subheading",
+          "default": "From planter materials to style options, discover which planter is best for your space."
+        },
+        {
+          "type": "color",
+          "id": "color_block_content_1",
+          "label": "Color",
+          "default": "#333333"
+        },
+        {
+          "type": "range",
+          "id": "font_size_top2",
+          "min": 18,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "fonts_sub_2",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "header",
+          "content": "Button slideshow"
+        },
+        {
+          "type": "text",
+          "id": "block_buton",
+          "label": "Button Label",
+          "default": "Shop now"
+        },
+        {
+          "type": "color",
+          "id": "color_block_button",
+          "label": "Color",
+          "default": "#fff"
+        },
+        {
+          "type": "range",
+          "id": "font_size_button",
+          "min": 14,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 14
+        },
+        {
+          "type": "text",
+          "id": "fonts_button",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "color",
+          "id": "color_hover_button",
+          "label": "Color hover Button",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "bgcolor_block_button",
+          "label": "Backgourd Color Button",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "bgcolor_block_button_hover",
+          "label": "Backgourd Color Hover Button",
+          "default": "#f2f2f2"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "URL Slideshow",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_banerimage_2",
+          "label": "Image Slideshow 2",
+          "info": "960 x 900px recommended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SLIDESHOW V2",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "slideshow",
+          "settings": {
+          }
+        },
+        {
+          "type": "slideshow",
+          "settings": {
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

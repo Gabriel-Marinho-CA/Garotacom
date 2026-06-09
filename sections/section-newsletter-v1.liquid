@@ -1,0 +1,151 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-newsletter-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{% endif %} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  {% if settings.newsletter_form_action != blank %}
+  {% assign form_action = settings.newsletter_form_action %}
+  {% else %}
+  {% assign form_action = '#' %}
+  {% endif %}
+  <div class="section-newsletter-v1{% if section.settings.ena_margin_top %} mt-all {% endif %}">
+    <div class="container container-v2">
+      <div class="row no-gutters align-items-center" style="background: {{ section.settings.bg_section }}">
+        <div class="col-12 col-lg-6 order-2 order-lg-1">
+          <div class="images">
+            {% if section.settings.banner_img != blank %}
+            <a href="{{ section.settings.banner_url }}">
+              <img loading="lazy" width="" height="" data-src="{{ section.settings.banner_img | image_url }}" class="lazyload img-fluid w-100" alt="_img">
+            </a>
+            {% else %}
+            <a href="{{ section.settings.banner_url }}">
+              <img loading="lazy" width="" height="" data-src="//via.placeholder.com/960x540" class="lazyload img-fluid w-100" alt="_img">
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 order-1 order-lg-2">
+          <div class="content-newsletter align-items-center">
+            <div class="info-newsletter">
+
+              {% if section.settings.icon1 != blank %}
+              <div class="icon">
+                <i class="{{ section.settings.icon1 }}"></i>
+              </div>
+              {% endif %}
+
+              {% if section.settings.title_newletter != blank %}
+              <h3 class="title-newsletter">{{ section.settings.title_newletter }}</h3>
+              {% endif %}
+              {% if section.settings.description != blank %}
+              <p class="desc">
+                {{ section.settings.description }}
+              </p>
+              {% endif %}
+
+            </div>
+            <div class="newletter_email">          
+              <form class="newsletter-form-wrap form-inline" action="{{ form_action }}" method="post">
+                <input type="email" name="EMAIL" class="form-control" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" required > 
+                <button class="btn submit-newsletter" type="submit">{{ 'general.newsletter_form.submit_footer' | t }}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+</style>
+{% schema %}
+{
+  "name": "NEWSLETTER V1",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "ena_margin_top",
+      "label": "Enable Add Margin Top",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_section",
+      "label": "Background Color",
+      "default": "#F0F8F6"
+    },
+    {
+      "type": "header",
+      "content": "Banner Left"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Image left",
+      "info": "960 x 540px recommended"
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "header",
+      "content": "Info newsletter"
+    },
+    {
+      "type": "text",
+      "id": "icon1",
+      "label": "Icon",
+      "default": "fa fa-envelope-open-o",
+      "info": "[Get icon in here](https://fontawesome.com/v4.7.0/icons)"
+    },
+    {
+      "type": "text",
+      "id": "title_newletter",
+      "label": "Title Newletter",
+      "default": "Newsletter Signup"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Join our list and get 15% off your first purchase!"
+    },
+    {
+      "type": "text",
+      "id": "icon_button",
+      "label": "Icon Button ",
+      "default": "fa fa-paper-plane",
+      "info": "[Get icon in here](https://fontawesome.com/v4.7.0/icons)"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "NEWSLETTER V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

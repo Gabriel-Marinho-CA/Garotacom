@@ -1,0 +1,440 @@
+/* Tailwind CSS Reset cho #mdev-cart */
+
+/* Thiết lập các biến CSS */
+#mdev-cart *,
+#mdev-cart ::after,
+#mdev-cart ::before {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgba(59, 130, 246, 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+    --tw-contain-size: ;
+    --tw-contain-layout: ;
+    --tw-contain-paint: ;
+    --tw-contain-style: ;
+}
+
+#mdev-cart ::backdrop {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgba(59, 130, 246, 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+    --tw-contain-size: ;
+    --tw-contain-layout: ;
+    --tw-contain-paint: ;
+    --tw-contain-style: ;
+}
+
+/* Box sizing, border */
+#mdev-cart *,
+#mdev-cart ::after,
+#mdev-cart ::before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+#mdev-cart ::after,
+#mdev-cart ::before {
+    --tw-content: '';
+}
+
+/* HTML và container cơ bản */
+#mdev-cart {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: inherit;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    line-height: inherit;
+    direction: ltr;
+}
+
+/* Elements */
+#mdev-cart hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+}
+
+#mdev-cart abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+}
+
+#mdev-cart h1,
+#mdev-cart h2,
+#mdev-cart h3,
+#mdev-cart h4,
+#mdev-cart h5,
+#mdev-cart h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+}
+
+#mdev-cart a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#mdev-cart b,
+#mdev-cart strong {
+    font-weight: bolder;
+}
+
+#mdev-cart code,
+#mdev-cart kbd,
+#mdev-cart pre,
+#mdev-cart samp {
+    font-family: inherit;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: inherit;
+}
+
+#mdev-cart small {
+    font-size: inherit;
+}
+
+#mdev-cart sub,
+#mdev-cart sup {
+    font-size: inherit;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+#mdev-cart sub {
+    bottom: -0.25em;
+}
+
+#mdev-cart sup {
+    top: -0.5em;
+}
+
+/* Tables */
+#mdev-cart table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+/* Forms */
+#mdev-cart button,
+#mdev-cart input,
+#mdev-cart optgroup,
+#mdev-cart select,
+#mdev-cart textarea {
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+#mdev-cart button,
+#mdev-cart select {
+    text-transform: none;
+}
+
+#mdev-cart button,
+#mdev-cart input:where([type='button']),
+#mdev-cart input:where([type='reset']),
+#mdev-cart input:where([type='submit']) {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+}
+
+#mdev-cart :-moz-focusring {
+    outline: auto;
+}
+
+#mdev-cart :-moz-ui-invalid {
+    box-shadow: none;
+}
+
+#mdev-cart progress {
+    vertical-align: baseline;
+}
+
+#mdev-cart ::-webkit-inner-spin-button,
+#mdev-cart ::-webkit-outer-spin-button {
+    height: auto;
+}
+
+#mdev-cart [type='search'] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+#mdev-cart ::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+#mdev-cart ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+/* Other elements */
+#mdev-cart summary {
+    display: list-item;
+}
+
+#mdev-cart blockquote,
+#mdev-cart dd,
+#mdev-cart dl,
+#mdev-cart figure,
+#mdev-cart h1,
+#mdev-cart h2,
+#mdev-cart h3,
+#mdev-cart h4,
+#mdev-cart h5,
+#mdev-cart h6,
+#mdev-cart hr,
+#mdev-cart p,
+#mdev-cart pre {
+    margin: 0;
+}
+
+#mdev-cart fieldset {
+    margin: 0;
+}
+
+#mdev-cart fieldset,
+#mdev-cart legend {
+    padding: 0;
+}
+
+#mdev-cart menu,
+#mdev-cart ol,
+#mdev-cart ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#mdev-cart dialog {
+    padding: 0;
+}
+
+#mdev-cart textarea {
+    resize: vertical;
+}
+
+#mdev-cart input::-moz-placeholder,
+#mdev-cart textarea::-moz-placeholder {
+    opacity: 1;
+    color: #9ca3af;
+}
+
+#mdev-cart input::-moz-placeholder, #mdev-cart textarea::-moz-placeholder {
+    opacity: 1;
+    color: #9ca3af;
+}
+
+#mdev-cart input::placeholder,
+#mdev-cart textarea::placeholder {
+    opacity: 1;
+    color: #9ca3af;
+}
+
+#mdev-cart [role='button'],
+#mdev-cart button {
+    cursor: pointer;
+}
+
+#mdev-cart :disabled {
+    cursor: default;
+}
+
+#mdev-cart audio,
+#mdev-cart canvas,
+#mdev-cart embed,
+#mdev-cart iframe,
+#mdev-cart img,
+#mdev-cart object,
+#mdev-cart svg,
+#mdev-cart video {
+    display: block;
+    vertical-align: middle;
+}
+
+#mdev-cart img,
+#mdev-cart video {
+    max-width: 100%;
+    height: auto;
+}
+
+#mdev-cart [hidden]:where(:not([hidden='until-found'])) {
+    display: none;
+}
+#mdev-cart svg{
+    width: 20px;
+    height: 20px;
+}
+
+
+
+#mdev-cart #wizz4-cart-drawer {
+    position: relative;
+    max-width: 1280px !important;
+    transform: none !important;
+    margin: auto;
+}
+
+#mdev-cart .loading-gif{
+    margin: auto;
+    display: block;
+}
+
+#mdev-cart #w4-storefront-drawer {
+    flex: 1;
+  }
+  
+
+.page-cart-v2 .cart-banner {
+    text-align: center;
+  }
+
+  #mdev-cart .w4-cart-body{
+    height: auto !important;
+  }
+
+  #mdev-cart #wizz4-cart-link {
+    margin: auto;
+    display: block;
+    max-width: 360px;
+  }
+
+  #mdev-cart #wizz4-cart-link button {
+    max-width: 360px !important;
+    margin: auto;
+  }
+
+  #mdev-cart.wizz-discount-code-wrapper {
+    max-width: 360px;
+  }
+
+
+  #mdev-cart .w4-h-\[104px\].w4-w-\[104px\] {
+    height: 180px !important;
+    height: 180px !important;;
+  }
+
+
+  .wizz-discount-code-input {
+    max-width: 320px;
+  }
+
+
+  .w4-px-4.w4-rounded-b-xl {
+    margin: auto;
+    display: block;
+    max-width: 360px;
+  }
+
+  .styles_snapCartStickyButton {
+    display: none !important;
+  }
+
+  .wizz-trustbagde-wrapper, .wizz-trustbagde-img-wrapper {
+    height: 20px !important;
+  }

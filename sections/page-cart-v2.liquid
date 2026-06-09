@@ -1,0 +1,42 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+For info on test orders:
+- General http://docs.shopify.com/manual/your-store/orders/test-orders
+- Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+{% endcomment %}
+
+<div class="wrap-bread-crumb breadcrumb_cart">
+  <div class="container container-v1" >
+    {% include 'breadcrumb' %}
+  </div>
+</div>
+<section class="page-cart page-cart-v2">
+  <div class="content-pages">
+    <div class="container container-v1">
+      <div class="content-about content-cart-page">
+      <div class="cart-content-list cart-content-banner promo-banner"><div class="cart-banner">
+        <img src="https://cdn.shopify.com/s/files/1/0759/6553/0357/files/CUPOMGAROTA10.png?v=1758060061"></div>
+        </div>
+      <!-- Copy contents from cart drawer -->
+      <div id="mdev-cart">
+        <img src="https://cdn.shopify.com/s/files/1/0759/6553/0357/files/loading.gif?v=1758058042" class="loading-gif">
+      </div>
+
+
+      </div>  
+    </div>
+  </div>
+  <!-- End Content Pages -->
+</section>
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": [
+
+  ]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}
