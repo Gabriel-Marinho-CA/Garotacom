@@ -1,3 +1,11 @@
 .veGnT{
   display: none;
 }
+
+  .js_productSearchResults {
+    height: fit-content !important;
+
+    &:has(.product_info) {
+    height:260px !important;
+  }
+  }
