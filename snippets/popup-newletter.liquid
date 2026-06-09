@@ -1,5 +1,5 @@
 {% if settings.select_newletter == "newsletter_v1" %}
-<section class="popup jsengo_popup">
+<section class="popup jsengo_popup" style="display:none">
   <div class="modal-overlay"></div>
   <div class="modal-window">
     <div class="window-window">
@@ -39,7 +39,7 @@
               {{ form.errors | default_errors }}
               <div class="form">
                 <div class="form-group">
-                  <input type="email" placeholder="Digite seu email" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
+                  <input type="email" placeholder="{{ settings.placeholder_popup }}" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
                   <button type="submit" class="btn btn-primary">{{ settings.button_name_popup }}</button>
                 </div>
               </div>
@@ -70,7 +70,7 @@
   </div>
 </section>
 {% elsif settings.select_newletter == "newsletter_v2" %}
-<section class="popup2 jsengo_popup">
+<section class="popup2 jsengo_popup" style="display:none">
   <div class="modal-overlay"></div>
   <div class="modal-window">
     <div class="window-window">
@@ -106,7 +106,7 @@
                 {{ form.errors | default_errors }}
                 <div class="form">
                   <div class="form-group">
-                    <input type="email" placeholder="Digite seu email" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
+                    <input type="email" placeholder="{{ settings.placeholder_popup }}" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
                     <button type="submit" class="btn btn-primary">{{ settings.button_name_popup }}</button>
                   </div>
                 </div>
@@ -134,7 +134,7 @@
   </div>
 </section>
 {% elsif settings.select_newletter == "newsletter_v3" %}
-<section class="popup3 jsengo_popup">
+<section class="popup3 jsengo_popup" style="display:none">
   <div class="modal-overlay"></div>
   <div class="modal-window">
     <div class="window-window">
@@ -170,7 +170,7 @@
                 {{ form.errors | default_errors }}
                 <div class="form">
                   <div class="form-group">
-                    <input type="email" placeholder="Digite seu email" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
+                    <input type="email" placeholder="{{ settings.placeholder_popup }}" class="form-control" name="customer[email]" {% if form.email %} value="{{ form.email }}"{% endif %} required>              
                     <button type="submit" class="btn btn-primary">{{ settings.button_name_popup }}</button>
                   </div>
                 </div>
