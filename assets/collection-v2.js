@@ -221,7 +221,7 @@
 
         $('.filter-blocks').replaceWith( $(data).find(".filter-blocks") );
         collection.filterMapClear();
-      	quickView();
+        if (typeof quickView === 'function') quickView();
         var ajaxCartConfig = {
           cartContainer: '.enj-minicart-ajax',
           addToCartSelector: '.enj-add-to-cart-btn',
@@ -246,7 +246,7 @@
                 //           $('.loadmore').appendTo('.collection_prod .product-grid-view row')
                 $('.loadmore').eq(0).remove();
                 loadmore();
-                quickView();
+                if (typeof quickView === 'function') quickView();
                 var ajaxCartConfig = {
                   cartContainer: '.enj-minicart-ajax',
                   addToCartSelector: '.enj-add-to-cart-btn',
