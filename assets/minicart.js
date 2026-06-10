@@ -199,7 +199,7 @@ class MinicartDrawer extends HTMLElement {
    */
   _renderItems(sectionHtml) {
     const doc = new DOMParser().parseFromString(sectionHtml, 'text/html');
-    const newContent = doc.querySelector('.minicart-items-inner');
+const newContent = doc.querySelector('.minicart-items-inner');
     const target = this.querySelector('.enj-minicart-ajax');
     if (target && newContent) {
       target.innerHTML = newContent.outerHTML;
