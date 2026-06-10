@@ -196,23 +196,7 @@ Add the page template as a class for easy page or template specific styling.
   <script src="{{ 'ajax-cart-v2.js' | asset_url }}" type="text/javascript" defer></script>
 
   {% endcomment %}
-  <script>
-    var ajaxCartConfig = {
-      cartContainer: '.enj-minicart-ajax',
-      addToCartSelector: '.enj-add-to-cart-btn',
-      cartCountSelector: '.enj-cartcount',
-      cartCostSelector: '.enj-cartcost',
-      moneyFormat: {{ shop.money_format | json }}
-    };
-      jQuery(function($) {
-      ajaxCart.init(ajaxCartConfig);
-    });
 
-    jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
-      // Bind to 'ajaxCart.afterCartLoad' to run any javascript after the cart has loaded in the DOM
-      /*   timber.RightDrawer.open(); */
-    });
-  </script>
   {% endif %}
 
   {% if template contains 'contact' %}

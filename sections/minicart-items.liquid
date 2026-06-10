@@ -6,25 +6,3 @@
 {% endcomment %}
 
 {% include 'minicart-items-content' %}
-
-{% schema %}
-{
-  "name": "Minicart Items",
-  "settings": [
-    {
-      "type": "number",
-      "id": "free_shipping_threshold",
-      "label": "Valor mínimo para frete grátis (R$)",
-      "default": 200
-    }
-  ],
-  "presets": [
-    {
-      "name": "Minicart Items",
-      "settings": {
-        "free_shipping_threshold": 200
-      }
-    }
-  ]
-}
-{% endschema %}
