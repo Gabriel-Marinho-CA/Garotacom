@@ -205,12 +205,10 @@ var ajaxCart = (function(module, $) {
   updateCountPrice = function (cart) {
     if ($cartCountSelector) {
       $cartCountSelector.html(cart.item_count).removeClass('hidden-count');
-      $('.product-popup').find('.product-item-count').html(cart.item_count);
+      $('.product-popup').find('.product-item-count').html(cart.item_count);  
       if (cart.item_count === 0) {
         $cartCountSelector.addClass('hidden-count');
-        $('.js-number-cart').html(0).removeClass('active');
-      } else {
-        $('.js-number-cart').html(cart.item_count).addClass('active');
+        $('.js-number-cart').removeClass('active');
       }
     }
     if ($cartCostSelector) {
@@ -279,6 +277,7 @@ var ajaxCart = (function(module, $) {
       .append('<p>' + "" + '</p>');
       cartCallback(cart);
       return;
+      $('.js-number-cart').removeClass('active');
     }
 
     // Handlebars.js cart layout
