@@ -17,37 +17,39 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
-            "description": "Sua loja de moda favorita.",
-            "logo_maxwidth": 160
+            "logo": "shopify://shop_images/logo-362090165-1722346878-586cef16c40e0a9382afc0e8d9c25b5a1722346878-480-0.webp",
+            "logo_maxwidth": 165,
+            "description": "Se inscreva em nossa newsletter e ganhe 10% OFF",
+            "newsletter_form_action": "",
+            "social_1_icon": "fa fa-whatsapp",
+            "social_1_url": "https://api.whatsapp.com/send/?phone=5511915542496&text=Ol%C3%A1&fbclid=PAZXh0bgNhZW0CMTEAAad5jk_2NH1i66ljkB1QPXxY6xFBxoNbv7s3arE-OALm3brhAwZpzDqqjF_axQ_aem_UxKHLClvZ0_qaWyUT93qfQ.",
+            "social_2_icon": "fa fa-instagram",
+            "social_2_url": "https://www.instagram.com/lojagarotacom",
+            "social_3_icon": "",
+            "social_3_url": "",
+            "social_4_icon": "",
+            "social_4_url": ""
           }
         },
         "links-1": {
           "type": "link_list",
           "settings": {
             "heading": "Institucional",
-            "menu": "footer"
+            "menu": "main-menu"
           }
         },
         "links-2": {
           "type": "link_list",
           "settings": {
             "heading": "Atendimento",
-            "menu": "footer"
-          }
-        },
-        "links-3": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Informações",
-            "menu": "footer"
+            "menu": "ajuda"
           }
         }
       },
       "block_order": [
         "newsletter",
         "links-1",
-        "links-2",
-        "links-3"
+        "links-2"
       ],
       "settings": {
         "bg_color": "#1a1a1a",
