@@ -59,8 +59,7 @@
   </div>
 
     {% comment %} Valor configurado no schema de sections/minicart-items (em R$), convertido para centavos {% endcomment %}
-  {% assign free_shipping_threshold = section.settings.free_shipping_threshold | times: 100 %}
-  {% render 'shipping-bar', free_shipping_threshold: free_shipping_threshold %}
+ {% render 'shipping-bar' %}
   <div class="sub-total">
     <span class="total-title float-left">{{ 'minicart.general.total_price' | t }}</span>
     <span class="total-price float-right">{{ cart.total_price | money }}</span>
