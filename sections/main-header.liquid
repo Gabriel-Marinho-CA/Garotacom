@@ -24,7 +24,7 @@
           {% include 'main-header-logo' %}
         </div>
         <div class="col-lg-8 d-flex justify-content-center">
-          <div class="menu right">{% include 'eveland-menu' %}</div>
+          <div class="menu right">{% include 'mega-menu-header' %}</div>
         </div>
         <div class="col-lg-2 currencies-login">
           {% include 'main-header-icons' %}
@@ -33,7 +33,7 @@
       {% elsif section.settings.select_layout == 'v2' %}
         {%- comment -%} v2: Menu left | Logo center | Icons right {%- endcomment -%}
         <div class="col-lg-5 p-0">
-          <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">{% include 'eveland-menu' %}</div>
+          <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">{% include 'mega-menu-header' %}</div>
         </div>
         <div class="col-lg-2 text-center">
           {% include 'main-header-logo' %}
@@ -48,7 +48,7 @@
           {% include 'main-header-logo' %}
         </div>
         <div class="col-lg-7 d-flex justify-content-start">
-          <div class="menu">{% include 'eveland-menu' %}</div>
+          <div class="menu">{% include 'mega-menu-header' %}</div>
         </div>
         <div class="col-lg-3 currencies-login">
           {% include 'main-header-icons' %}
@@ -60,7 +60,7 @@
           {% include 'main-header-logo' %}
         </div>
         <div class="col-lg-7 d-flex justify-content-end">
-          <div class="menu">{% include 'eveland-menu' %}</div>
+          <div class="menu">{% include 'mega-menu-header' %}</div>
         </div>
         <div class="col-lg-3 currencies-login">
           {% include 'main-header-icons' %}
