@@ -1,6 +1,8 @@
 <div class="minicart-items-inner">
   {% if cart.item_count > 0 %}
 
+     {% render 'shipping-bar' %}
+
   <div class="prod">
     <div class="product-cart">
       {% for item in cart.items %}
@@ -58,8 +60,7 @@
     </div>
   </div>
 
-    {% comment %} Valor configurado no schema de sections/minicart-items (em R$), convertido para centavos {% endcomment %}
- {% render 'shipping-bar' %}
+
   <div class="sub-total">
     <span class="total-title float-left">{{ 'minicart.general.total_price' | t }}</span>
     <span class="total-price float-right">{{ cart.total_price | money }}</span>
