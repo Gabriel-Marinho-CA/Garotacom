@@ -73,21 +73,24 @@ ShopifyAPI.onError = function(XMLHttpRequest, textStatus) {
     - Allow custom error callback
 ==============================================================================*/
 ShopifyAPI.addItemFromForm = function(form, callback, errorCallback) {
+  var formData = jQuery(form).serialize();
+  console.log('[AjaxCart] ADD - enviando para /cart/add.js | data:', formData);
   var params = {
     type: 'POST',
     url: '/cart/add.js',
-    data: jQuery(form).serialize(),
+    data: formData,
     dataType: 'json',
     success: function(line_item) {
+      console.log('[AjaxCart] ADD - sucesso | item:', line_item);
       if ((typeof callback) === 'function') {
         callback(line_item, form);
-        console.log("added")
       }
       else {
         ShopifyAPI.onItemAdded(line_item, form);
       }
     },
     error: function(XMLHttpRequest, textStatus) {
+      console.error('[AjaxCart] ADD - erro | status:', textStatus, '| response:', XMLHttpRequest.responseText);
       if ((typeof errorCallback) === 'function') {
         errorCallback(XMLHttpRequest, textStatus);
       }
@@ -113,21 +116,24 @@ ShopifyAPI.getCart = function(callback) {
 
 // POST to cart/change.js returns the cart in JSON
 ShopifyAPI.changeItem = function(line, quantity, callback) {
+  var action = quantity === 0 ? 'DELETE' : 'UPDATE';
+  console.log('[AjaxCart] ' + action + ' - enviando para /cart/change.js | line:', line, '| qty:', quantity);
   var params = {
     type: 'POST',
     url: '/cart/change.js',
     data: 'quantity=' + quantity + '&line=' + line,
     dataType: 'json',
     success: function(cart) {
+      console.log('[AjaxCart] ' + action + ' - sucesso | total itens:', cart.item_count, '| total price:', cart.total_price, '| cart:', cart);
       if ((typeof callback) === 'function') {
         callback(cart);
-         console.log("changed")
       }
       else {
         ShopifyAPI.onCartUpdate(cart);
       }
     },
     error: function(XMLHttpRequest, textStatus) {
+      console.error('[AjaxCart] ' + action + ' - erro | status:', textStatus, '| response:', XMLHttpRequest.responseText);
       ShopifyAPI.onError(XMLHttpRequest, textStatus);
     }
   };
@@ -237,6 +243,7 @@ var ajaxCart = (function(module, $) {
   };
 
   itemAddedCallback = function (product, form) {
+    console.log('[AjaxCart] itemAddedCallback | produto adicionado:', product.title, '| qty:', product.quantity, '| variant_id:', product.variant_id);
     var $addToCart_btn = $(form).find(settings.addToCartSelector);
     $addToCart_btn.removeClass('is-adding').addClass('is-added');
     $addToCart_btn.find('.enj-loader-add-to-cart').html('<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" height="400" width="400" xml:space="preserve" id="svg2" version="1.1"><metadata id="metadata8"><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/></cc:Work></rdf:RDF></metadata><defs id="defs6"/><g transform="matrix(1.3333333,0,0,-1.3333333,0,400)" id="g10"><g transform="scale(0.1)" id="g12"><path id="path14" style="/* fill:#231f20; */fill-opacity:1;fill-rule:nonzero;stroke:none;" d="M 2539.18,1385.02 C 2479.15,849.23 2004.9,434.289 1446.39,470.129 931.406,503.16 516.711,917.871 483.672,1432.85 c -38.359,597.88 439.844,1099.19 1029.878,1099.19 78.39,0 149.09,-7.24 218.27,-21.98 42.37,-9.03 86.4,4.1 116.99,34.78 v 0 c 71.82,72.04 34.9,194.92 -64.67,215.74 -88.86,18.58 -179.73,29.87 -270.59,29.87 -709.417,0 -1290.445,-581.02 -1290.445,-1290.45 0,-709.418 581.028,-1290.449 1290.445,-1290.449 661.24,0 1210.92,504.781 1282.54,1147.799 8.47,76.02 -50.73,142.65 -127.21,142.65 h -2.45 c -65.64,0 -119.94,-49.75 -127.25,-114.98 z M 894.004,1654.48 v 0 c -49.668,-49.89 -49.578,-130.58 0.207,-180.36 L 1384.35,983.98 2584.51,2184.15 c 49.87,49.87 49.87,130.71 0,180.57 l -0.23,0.23 c -49.88,49.87 -130.74,49.85 -180.6,-0.03 L 1384.35,1344.99 1074.79,1654.67 c -49.94,49.95 -130.95,49.87 -180.786,-0.19"/></g></g></svg>');
@@ -256,6 +263,7 @@ var ajaxCart = (function(module, $) {
 
   itemErrorCallback = function (XMLHttpRequest, textStatus) {
     var data = eval('(' + XMLHttpRequest.responseText + ')');
+    console.error('[AjaxCart] itemErrorCallback | status:', data.status, '| message:', data.message, '| description:', data.description);
     $addToCart.removeClass('is-adding is-added');
     $addToCart.find('.enj-loader-add-to-cart').remove();
 
@@ -267,6 +275,7 @@ var ajaxCart = (function(module, $) {
   };
 
   cartUpdateCallback = function (cart) {
+    console.log('[AjaxCart] cartUpdateCallback | item_count:', cart.item_count, '| total_price:', cart.total_price);
     // Update quantity and price
     updateCountPrice(cart);
     buildCart(cart);
@@ -355,6 +364,8 @@ var ajaxCart = (function(module, $) {
           qty = parseInt($qtySelector.val().replace(/\D/g, ''));
 
       var qty = validateQty(qty);
+      var direction = $el.hasClass('ajaxcart__qty--plus') ? 'plus' : 'minus';
+      console.log('[AjaxCart] clique qty-adjust | line:', line, '| qty atual:', qty, '| direção:', direction);
 
       // Add or subtract from the current quantity
       if ($el.hasClass('ajaxcart__qty--plus')) {
@@ -363,6 +374,7 @@ var ajaxCart = (function(module, $) {
         qty -= 1;
         if (qty <= 0) qty = 0;
       }
+      console.log('[AjaxCart] qty-adjust | nova qty:', qty, (line ? '-> vai chamar updateQuantity' : '-> sem line, só atualiza input'));
       // If it has a data-line, update the cart.
       // Otherwise, just update the input's number
       if (line) {
@@ -375,7 +387,8 @@ var ajaxCart = (function(module, $) {
     $body.on('click', '.remove-product', function() {
       var $el = $(this),
           line = $el.data('line'),
-          qty = 0
+          qty = 0;
+      console.log('[AjaxCart] clique remove-product | line:', line, '-> qty vai ser 0 (deletar item)');
       if (line) {
         updateQuantity(line, qty);
       } else {
@@ -400,6 +413,7 @@ var ajaxCart = (function(module, $) {
 
     function updateQuantity(line, qty) {
       isUpdating = true;
+      console.log('[AjaxCart] updateQuantity | line:', line, '| qty:', qty, qty === 0 ? '(REMOVENDO item)' : '(ATUALIZANDO qty)');
 
       // Add activity classes when changing cart quantities
       var $row = $('.ajaxcart__row[data-line="' + line + '"]').addClass('is-loading');
@@ -425,6 +439,7 @@ var ajaxCart = (function(module, $) {
 
   adjustCartCallback = function (cart) {
     isUpdating = false;
+    console.log('[AjaxCart] adjustCartCallback | cart atualizado | item_count:', cart.item_count, '| total_price:', cart.total_price);
 
     // Update quantity and price
     updateCountPrice(cart);
