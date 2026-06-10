@@ -14,8 +14,10 @@
 
         {%- if link.links != blank -%}
           {%- assign current_banner = blank -%}
+          {%- assign link_id = link.handle | downcase -%}
           {%- for banner in banner_blocks -%}
-            {%- if banner.settings.menu_item_id == link.handle -%}
+            {%- assign banner_id = banner.settings.menu_item_id | downcase | strip -%}
+            {%- if banner_id == link_id -%}
               {%- assign current_banner = banner -%}
             {%- endif -%}
           {%- endfor -%}
