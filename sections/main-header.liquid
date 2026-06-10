@@ -1,0 +1,320 @@
+<!-- /sections/main-header.liquid -->
+
+{% assign hd_class = 'main-header-wrap' %}
+
+{% if section.settings.select_layout == 'v5' or section.settings.select_layout == 'v6' %}
+  {% include 'eveland-horizon-menu' %}
+{% endif %}
+
+<header id="header" class="{{ hd_class }} layout-{{ section.settings.select_layout }} js_height_hd jsheader_sticky d-none d-xl-block {% if section.settings.hd_enable_transparent %}header-absolute{% endif %}">
+  <div class="container container-v1">
+    <div class="row align-items-center">
+
+      {% if section.settings.select_layout == 'v1' %}
+        {%- comment -%} v1: Logo left | Menu center | Icons right {%- endcomment -%}
+        <div class="col-lg-2 p-0">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-8 d-flex justify-content-center">
+          <div class="menu right">{% include 'eveland-menu' %}</div>
+        </div>
+        <div class="col-lg-2 currencies-login">
+          {% include 'main-header-icons' %}
+        </div>
+
+      {% elsif section.settings.select_layout == 'v2' %}
+        {%- comment -%} v2: Menu left | Logo center | Icons right {%- endcomment -%}
+        <div class="col-lg-5 p-0">
+          <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">{% include 'eveland-menu' %}</div>
+        </div>
+        <div class="col-lg-2 text-center">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-5 currencies-login">
+          {% include 'main-header-icons' %}
+        </div>
+
+      {% elsif section.settings.select_layout == 'v3' %}
+        {%- comment -%} v3: Logo left | Menu left-aligned | Icons right {%- endcomment -%}
+        <div class="col-lg-2">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-7 d-flex justify-content-start">
+          <div class="menu">{% include 'eveland-menu' %}</div>
+        </div>
+        <div class="col-lg-3 currencies-login">
+          {% include 'main-header-icons' %}
+        </div>
+
+      {% elsif section.settings.select_layout == 'v4' %}
+        {%- comment -%} v4: Logo left | Menu right-aligned | Icons right {%- endcomment -%}
+        <div class="col-lg-2">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-7 d-flex justify-content-end">
+          <div class="menu">{% include 'eveland-menu' %}</div>
+        </div>
+        <div class="col-lg-3 currencies-login">
+          {% include 'main-header-icons' %}
+        </div>
+
+      {% elsif section.settings.select_layout == 'v5' %}
+        {%- comment -%} v5: Hamburger left | Logo center | Icons right {%- endcomment -%}
+        <div class="col-lg-5">
+          <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">
+            <div class="model_menu js-model_menu">
+              <span class="model-menu-icon"><span></span><span></span><span></span></span>
+              {% if settings.name_modal_menu_hdv5 != blank %}
+              <span class="model-menu-title">{{ settings.name_modal_menu_hdv5 }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 text-center">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-5 currencies-login">
+          {% include 'main-header-icons' %}
+        </div>
+
+      {% elsif section.settings.select_layout == 'v6' %}
+        {%- comment -%} v6: Logo left | Icons + Hamburger right {%- endcomment -%}
+        <div class="col-lg-6 left">
+          {% include 'main-header-logo' %}
+        </div>
+        <div class="col-lg-6 currencies-login">
+          {% include 'main-header-icons' %}
+          <div class="model_menu js-model_menu">
+            <span class="model-menu-icon"><span></span><span></span><span></span></span>
+          </div>
+        </div>
+
+      {% endif %}
+
+    </div>
+  </div>
+</header>
+
+<script>
+  jQuery(document).ready(function($) {
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    var bgHex = "{{ section.settings.hd_bg_color }}";
+    var opacity = {{ section.settings.hd_bg_opacity }};
+    var rgb = hexToRgb(bgHex);
+
+    {% unless section.settings.hd_enable_transparent %}
+    if (rgb) {
+      $('.main-header-wrap').css({'background': 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'});
+    }
+    {% endunless %}
+
+    {% if section.settings.hd_enable_sticky %}
+    (function stickyScroll() {
+      var $nav = $(".jsheader_sticky");
+      $nav.removeClass('menu_scroll_main');
+      $(document).scroll(function() {
+        $nav.toggleClass('menu_scroll_main', $(this).scrollTop() > $nav.height());
+        if (rgb) {
+          $('.main-header-wrap.menu_scroll_main').css({'background': 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'});
+        }
+        {% if section.settings.hd_enable_transparent %}
+        if ($(this).scrollTop() < $nav.height()) {
+          $('.main-header-wrap').css({'background': 'none'});
+          $nav.removeClass('menu_scroll_main');
+        }
+        {% endif %}
+      });
+    })();
+    {% endif %}
+  });
+</script>
+
+<style>
+  .number-cart.active {
+    width: 15px !important;
+    height: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px !important;
+  }
+  #header .menu ul li .nav-link {
+    color: {{ section.settings.hd_color_text }};
+  }
+  #header .currencies-login .cart-login-search ul li a i {
+    color: {{ section.settings.hd_color_text }};
+  }
+  #header .currencies-login .cart-login-search ul li a svg {
+    fill: {{ section.settings.hd_color_text }};
+  }
+  #header .currencies-login .cart-login-search ul li .cart .number-cart {
+    color: {{ section.settings.hd_color_text }};
+  }
+  {% if section.settings.select_layout == 'v5' or section.settings.select_layout == 'v6' %}
+  .main-header-wrap .model_menu {
+    color: {{ section.settings.hd_color_text }};
+  }
+  .main-header-wrap .model_menu .model-menu-icon span {
+    background: {{ section.settings.hd_color_text }};
+  }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Main Header",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_layout",
+      "label": "Layout",
+      "options": [
+        { "value": "v1", "label": "v1 — Logo | Menu | Icons" },
+        { "value": "v2", "label": "v2 — Menu | Logo | Icons" },
+        { "value": "v3", "label": "v3 — Logo | Menu esquerda | Icons" },
+        { "value": "v4", "label": "v4 — Logo | Menu direita | Icons" },
+        { "value": "v5", "label": "v5 — Hamburger | Logo | Icons" },
+        { "value": "v6", "label": "v6 — Logo | Icons + Hamburger" }
+      ],
+      "default": "v1"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "hd_logo",
+      "label": "Logo Image",
+      "info": "140 x 46px .png recomendado"
+    },
+    {
+      "type": "range",
+      "id": "hd_logo_maxwidth",
+      "min": 35,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Largura do Logo",
+      "default": 140
+    },
+    {
+      "type": "textarea",
+      "id": "hd_logo_svg",
+      "label": "Logo SVG (opcional)"
+    },
+    {
+      "type": "header",
+      "content": "Cores & Fundo"
+    },
+    {
+      "type": "color",
+      "id": "hd_color_text",
+      "label": "Cor dos textos e ícones",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "hd_enable_transparent",
+      "label": "Header transparente",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "hd_bg_color",
+      "label": "Cor de fundo",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "hd_bg_opacity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "label": "Opacidade do fundo",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Comportamento"
+    },
+    {
+      "type": "checkbox",
+      "id": "hd_enable_sticky",
+      "label": "Habilitar Sticky",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu_store",
+      "label": "Menu Principal"
+    },
+    {
+      "type": "header",
+      "content": "Ícones"
+    },
+    {
+      "type": "text",
+      "id": "hd_icon_search",
+      "label": "Ícone Busca (classe)",
+      "default": "fa fa-search"
+    },
+    {
+      "type": "textarea",
+      "id": "hd_icon_search_svg",
+      "label": "Ícone Busca SVG"
+    },
+    {
+      "type": "text",
+      "id": "hd_icon_login",
+      "label": "Ícone Login (classe)",
+      "default": "icon-icon-user"
+    },
+    {
+      "type": "textarea",
+      "id": "hd_icon_login_svg",
+      "label": "Ícone Login SVG"
+    },
+    {
+      "type": "text",
+      "id": "hd_icon_wishlist",
+      "label": "Ícone Wishlist (classe)",
+      "default": "icon-heart"
+    },
+    {
+      "type": "textarea",
+      "id": "hd_icon_wishlist_svg",
+      "label": "Ícone Wishlist SVG"
+    },
+    {
+      "type": "url",
+      "id": "url_wishlist",
+      "label": "URL Wishlist"
+    },
+    {
+      "type": "text",
+      "id": "hd_icon_cart",
+      "label": "Ícone Carrinho (classe)",
+      "default": "icon-icon-cart"
+    },
+    {
+      "type": "textarea",
+      "id": "hd_icon_cart_svg",
+      "label": "Ícone Carrinho SVG"
+    }
+  ]
+}
+{% endschema %}
