@@ -20,7 +20,7 @@
             "richtext": "<p>Ganhe 10% OFF na primeira compra com o cupom: <strong>GAROTA10</strong></p>",
             "show_link": false,
             "link_text": "Saiba mais",
-            "link_url": "",
+            "link_url": "#",
             "link_bg_color": "#ffffff",
             "link_text_color": "#000000",
             "link_border_radius": 4,
