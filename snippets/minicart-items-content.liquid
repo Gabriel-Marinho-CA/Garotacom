@@ -27,8 +27,8 @@
               </div>
 
               <div class="product_quanity">
-                <minicart-quantity-button>
-                  <button type="button" class="qty-btn qty-minus" aria-label="Diminuir quantidade">&#8722;</button>
+                <minicart-quantity-button style="display:flex;">
+                  <button style="color: #000;" type="button" class="qty-btn qty-minus" aria-label="Diminuir quantidade">&#8722;</button>
                   <input
                     type="number"
                     class="qty-input"
@@ -38,7 +38,7 @@
                     data-variant-id="{{ item.variant_id }}"
                     aria-label="Quantidade do item {{ item.product.title }}"
                   >
-                  <button type="button" class="qty-btn qty-plus" aria-label="Aumentar quantidade">&#43;</button>
+                  <button style="color: #000;" type="button" class="qty-btn qty-plus" aria-label="Aumentar quantidade">&#43;</button>
                 </minicart-quantity-button>
               </div>
             </div>
@@ -46,7 +46,7 @@
 
           <div class="produc_remove">
             <minicart-remove-button data-line="{{ forloop.index }}">
-              <button type="button" aria-label="Remover {{ item.product.title }}">
+              <button type="button" aria-label="Remover {{ item.product.title }}" style="color: #000;">
                 <i class="fa fa-trash-o"></i>
               </button>
             </minicart-remove-button>
