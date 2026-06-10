@@ -12,9 +12,19 @@
   max-width: 19px;
   
   }
+  #header {
+    .dropdown-menu {
+    width: 100%;
+    top: 94px;
+  }
+  li.nav-item.dropdown,
+  .navbar.navbar-expand-lg,
+  .col-lg-7.d-flex.justify-content-start  {
+  position:initial !important;}
+  }
 </style>
 
-<header id="header" class="{{ hd_class }} layout-{{ section.settings.select_layout }} js_height_hd jsheader_sticky d-none d-xl-block {% if section.settings.hd_enable_transparent %}header-absolute{% endif %}">
+<header id="header" style="position:relative;" class="{{ hd_class }} layout-{{ section.settings.select_layout }} js_height_hd jsheader_sticky d-none d-xl-block {% if section.settings.hd_enable_transparent %}header-absolute{% endif %}">
   <div class="container container-v1">
     <div class="row align-items-center">
 
