@@ -129,7 +129,7 @@ Add the page template as a class for easy page or template specific styling.
       {% if settings.enable_promo_topbar %}
       {% include 'promo-topbar' %}
       {% endif %}
-      {% section 'main-header' %}
+      {% sections 'header-group' %}
 
       <!-- HEADING HIDDEN SEO -->
       {% if template contains 'index' %}
