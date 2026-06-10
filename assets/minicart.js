@@ -108,10 +108,20 @@ class MinicartDrawer extends HTMLElement {
   connectedCallback() {
     this._bindStaticEvents();
 
-    // Escuta atualizações externas (ex: add-to-cart na página de produto)
-    subscribe(window.CART_EVENTS.updated, ({ source } = {}) => {
+    // Escuta atualizações externas (add-to-cart, etc.)
+    subscribe(window.CART_EVENTS.updated, ({ source, sections, cart } = {}) => {
       if (source === 'minicart-drawer') return;
-      this._refreshFromServer();
+
+      if (sections?.['minicart-items']) {
+        this._renderItems(sections['minicart-items']);
+      } else {
+        this._refreshFromServer();
+      }
+
+      if (cart) this._updateCartCount(cart.item_count);
+
+      // Abre o minicart automaticamente ao adicionar produto
+      if (source === 'add-to-cart') this.open();
     });
   }
 
@@ -199,7 +209,7 @@ class MinicartDrawer extends HTMLElement {
    */
   _renderItems(sectionHtml) {
     const doc = new DOMParser().parseFromString(sectionHtml, 'text/html');
-const newContent = doc.querySelector('.minicart-items-inner');
+    const newContent = doc.querySelector('.minicart-items-inner');
     const target = this.querySelector('.enj-minicart-ajax');
     if (target && newContent) {
       target.innerHTML = newContent.outerHTML;
@@ -219,6 +229,76 @@ const newContent = doc.querySelector('.minicart-items-inner');
   }
 }
 customElements.define('minicart-drawer', MinicartDrawer);
+
+// ─────────────────────────────────────────────
+// add-to-cart-button
+// Uso: <add-to-cart-button>
+//        <button class="enj-add-to-cart-btn">Adicionar</button>
+//      </add-to-cart-button>
+// ─────────────────────────────────────────────
+class AddToCartButton extends HTMLElement {
+  connectedCallback() {
+    this._btn  = this.querySelector('button');
+    this._form = this.closest('form');
+    if (!this._btn || !this._form) return;
+
+    this._btn.addEventListener('click', (e) => {
+        console.log("@@@")
+      e.preventDefault();
+      this._addToCart();
+    });
+  }
+
+  _addToCart() {
+    const variantId = this._form.querySelector('[name="id"]')?.value;
+    const quantity  = parseInt(this._form.querySelector('[name="quantity"]')?.value || 1);
+    if (!variantId) return;
+
+    this._setLoading(true);
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity }),
+    })
+      .then(res => {
+        if (!res.ok) return res.json().then(e => { throw new Error(e.description || 'Erro ao adicionar'); });
+        return res.json();
+      })
+      .then(addedItem => {
+        // Busca sections + cart em paralelo para o evento
+        return Promise.all([
+          fetch('/?sections=minicart-items').then(r => r.json()),
+          fetch('/cart.js').then(r => r.json()),
+        ]).then(([sections, cart]) => {
+          publish(window.CART_EVENTS.updated, {
+            source: 'add-to-cart',
+            addedItem,
+            sections,
+            cart,
+          });
+        });
+      })
+      .catch(err => {
+        console.error('[AddToCartButton]', err);
+        this._setError();
+      })
+      .finally(() => {
+        this._setLoading(false);
+      });
+  }
+
+  _setLoading(loading) {
+    this._btn.disabled = loading;
+    this._btn.classList.toggle('is-loading', loading);
+  }
+
+  _setError() {
+    this._btn.classList.add('is-error');
+    setTimeout(() => this._btn.classList.remove('is-error'), 2000);
+  }
+}
+customElements.define('add-to-cart-button', AddToCartButton);
 
 // ─────────────────────────────────────────────
 // Integração com o botão de abrir (.js-call-minicart)
