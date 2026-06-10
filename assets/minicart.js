@@ -240,6 +240,8 @@ class AddToCartButton extends HTMLElement {
   connectedCallback() {
     this._btn  = this.querySelector('button');
     this._form = this.closest('form');
+    console.log(this._btn);
+    console.log(this._form );
     if (!this._btn || !this._form) return;
 
     this._btn.addEventListener('click', (e) => {
