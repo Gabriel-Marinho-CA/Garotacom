@@ -411,6 +411,7 @@
 
               <!-- End Gallery -->
             </div>
+            @#@@@@@
             <div class="col-lg-5 col-md-5 col-sm-12 col-12 ">
 
               <div class="detail-info">
@@ -563,9 +564,11 @@
                         <input type="number" size="4" title="Qty" value="1" min="1" id="Quantity" name="quantity" />
                       </div>
                       {% endif %}
-                      <button type="submit" class="shop-button enj-add-to-cart-btn engoj-btn-addtocart">
-                        {{ settings.pia_addcart_name }}
-                      </button>
+                      <add-to-cart-button>
+                        <button type="submit" class="shop-button enj-add-to-cart-btn engoj-btn-addtocart">
+                          {{ settings.pia_addcart_name }}
+                        </button>
+                      </add-to-cart-button>
                     </div>
                     <!-- End add to cart & quantity -->
                     {% form 'product', product %}
