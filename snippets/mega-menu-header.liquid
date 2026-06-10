@@ -1,7 +1,7 @@
 {% comment %}
   Mega menu principal.
   Usa: section.settings.main_menu_store (handle do menu)
-  Suporta: section.blocks do tipo 'banner_menus' (1 banner por item de menu, na ordem)
+  Suporta: section.blocks do tipo 'banner_menus' associados por menu_item_id == link.handle
 {% endcomment %}
 
 {%- assign banner_blocks = section.blocks | where: 'type', 'banner_menus' -%}
@@ -13,7 +13,12 @@
       {%- for link in linklists[section.settings.main_menu_store].links -%}
 
         {%- if link.links != blank -%}
-          {%- assign current_banner = banner_blocks[forloop.index0] -%}
+          {%- assign current_banner = blank -%}
+          {%- for banner in banner_blocks -%}
+            {%- if banner.settings.menu_item_id == link.handle -%}
+              {%- assign current_banner = banner -%}
+            {%- endif -%}
+          {%- endfor -%}
           {%- assign has_banner = false -%}
           {%- if current_banner != blank and current_banner.settings.banner_menu != blank -%}
             {%- assign has_banner = true -%}
