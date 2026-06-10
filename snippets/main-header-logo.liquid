@@ -1,0 +1,17 @@
+<div class="logo">
+  <div class="center logo delay05">
+    {% if section.settings.hd_logo_svg != blank %}
+    <div class="logosvg" style="max-width:{{ section.settings.hd_logo_maxwidth }}px;">
+      <a class="logourl" href="{{ shop.url }}">{{ section.settings.hd_logo_svg }}</a>
+    </div>
+    {% else %}
+    <a href="{{ shop.url }}">
+      {% if section.settings.hd_logo != blank %}
+      <img loading="lazy" src="{{ section.settings.hd_logo | image_url }}" width="{{ section.settings.hd_logo_maxwidth }}" alt="{{ shop.name }}">
+      {% else %}
+      <img loading="lazy" src="//via.placeholder.com/160x46" width="{{ section.settings.hd_logo_maxwidth }}" alt="{{ shop.name }}">
+      {% endif %}
+    </a>
+    {% endif %}
+  </div>
+</div>

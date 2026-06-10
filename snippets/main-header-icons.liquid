@@ -1,0 +1,42 @@
+<div class="cart-login-search align-items-center">
+  <ul class="list-inline list-unstyled mb-0">
+    <li class="list-inline-item mr-0">
+      <a href="javascript:void(0)" class="search js-search-destop">
+        {% if section.settings.hd_icon_search_svg != blank %}
+        {{ section.settings.hd_icon_search_svg }}
+        {% else %}
+        <i class="{{ section.settings.hd_icon_search }}"></i>
+        {% endif %}
+      </a>
+    </li>
+    <li class="list-inline-item mr-0">
+      <a href="{% if customer %}/account{% else %}javascript:void(0){% endif %}" class="login {% unless customer %}js-call-popup-login{% endunless %}">
+        {% if section.settings.hd_icon_login_svg != blank %}
+        {{ section.settings.hd_icon_login_svg }}
+        {% else %}
+        <i class="{{ section.settings.hd_icon_login }}"></i>
+        {% endif %}
+      </a>
+    </li>
+    <li class="list-inline-item mr-0">
+      <a href="{{ section.settings.url_wishlist }}" class="">
+        {% if section.settings.hd_icon_wishlist_svg != blank %}
+        {{ section.settings.hd_icon_wishlist_svg }}
+        {% else %}
+        <i class="{{ section.settings.hd_icon_wishlist }}"></i>
+        {% endif %}
+      </a>
+    </li>
+    <li class="list-inline-item mr-0">
+      <a href="javascript:void(0)" class="cart js-call-minicart">
+        {% if section.settings.hd_icon_cart_svg != blank %}
+        {{ section.settings.hd_icon_cart_svg }}
+        {% else %}
+        <i class="{{ section.settings.hd_icon_cart }}"></i>
+        {% endif %}
+        <span class="js-number-cart number-cart {% if cart.item_count > 0 %}active{% endif %}"></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="clearfix"></div>
