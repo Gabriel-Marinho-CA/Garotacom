@@ -1,0 +1,14 @@
+{% comment %}
+  sections/minicart-items.liquid
+  Section usada exclusivamente pela Shopify Sections Rendering API.
+  Quando o JS chama /cart/change.js com sections: ['minicart-items'],
+  o Shopify renderiza esta section e retorna o HTML atualizado.
+{% endcomment %}
+
+{% include 'minicart-items-content' %}
+
+{% schema %}
+{
+  "name": "Minicart Items"
+}
+{% endschema %}
