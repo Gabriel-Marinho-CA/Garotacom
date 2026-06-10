@@ -238,16 +238,15 @@ customElements.define('minicart-drawer', MinicartDrawer);
 // ─────────────────────────────────────────────
 class AddToCartButton extends HTMLElement {
   connectedCallback() {
-    this._btn  = this.querySelector('button');
-    this._form = this.closest('form');
-    console.log(this._btn);
-    console.log(this._form );
-    if (!this._btn || !this._form) return;
+    requestAnimationFrame(() => {
+      this._btn  = this.querySelector('button');
+      this._form = this.closest('form');
+      if (!this._btn || !this._form) return;
 
-    this._btn.addEventListener('click', (e) => {
-        console.log("@@@")
-      e.preventDefault();
-      this._addToCart();
+      this._btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this._addToCart();
+      });
     });
   }
 
@@ -305,7 +304,7 @@ customElements.define('add-to-cart-button', AddToCartButton);
 // ─────────────────────────────────────────────
 // Integração com o botão de abrir (.js-call-minicart)
 // Permite que o jQuery existente e o novo componente coexistam.
-// Se o jQuery já cuida do open, este listener é um fallback.
+// Se o jQuery já cuida do open, este listener é um fallback. 
 // ─────────────────────────────────────────────
 document.addEventListener('click', (e) => {
   const trigger = e.target.closest('.js-call-minicart');
