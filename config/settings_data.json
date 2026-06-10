@@ -6178,7 +6178,7 @@
       },
       "18155451270687726080": {
         "type": "shopify://apps/snap-cart-drawer/blocks/sticky_button/749c3d78-31de-41bb-a321-492d569e1a37",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
