@@ -52,8 +52,8 @@
         "links-2"
       ],
       "settings": {
-        "bg_color": "#1a1a1a",
-        "text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "text_color": "#111111",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
