@@ -61,17 +61,6 @@ if (!Shopify.formatMoney) {
   };
 }
 
-//
-Shopify.getProduct = function(handle, callback) {
-  jQuery.getJSON('/products/' + handle + '.js', function (product, textStatus) {
-    if ((typeof callback) === 'function') {
-      callback(product);
-    }
-    else {
-      Shopify.onProduct(product);
-    }
-  });
-};
 
 function currencyConverter(money) {
   Currency.format = 'money_with_currency_format';
@@ -273,9 +262,6 @@ timber.accessibleNav = function () {
 
 timber.drawersInit = function () {
   timber.LeftDrawer = new timber.Drawers('NavDrawer', 'left');
-  timber.RightDrawer = new timber.Drawers('CartDrawer', 'right', {
-    'onDrawerOpen': ajaxCart.load
-  });
 };
 
 timber.mobileNavToggle = function () {
