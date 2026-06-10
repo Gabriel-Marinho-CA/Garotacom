@@ -34,7 +34,7 @@
         {% else %}
         <i class="{{ section.settings.hd_icon_cart }}"></i>
         {% endif %}
-        <span class="js-number-cart number-cart {% if cart.item_count > 0 %}active{% endif %}"></span>
+        <span class="js-number-cart number-cart {% if cart.item_count > 0 %}active{% endif %}">{{  cart.item_count }}</span>
       </button>
     </li>
   </ul>
