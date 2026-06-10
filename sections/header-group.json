@@ -50,21 +50,13 @@
         "banner_menus_6fKJjB": {
           "type": "banner_menus",
           "settings": {
-            "menu_item_id": "Tops",
+            "menu_item_id": "TOPS",
             "banner_menu": "shopify://shop_images/2_ae782287-9974-46bc-9caa-6c5b20527b6f.png"
-          }
-        },
-        "banner_menus_HAMyVL": {
-          "type": "banner_menus",
-          "settings": {
-            "menu_item_id": "",
-            "banner_menu": "shopify://shop_images/DSC04230.jpg"
           }
         }
       },
       "block_order": [
-        "banner_menus_6fKJjB",
-        "banner_menus_HAMyVL"
+        "banner_menus_6fKJjB"
       ],
       "settings": {
         "select_layout": "v3",
