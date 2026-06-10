@@ -230,7 +230,7 @@
           moneyFormat: null
         };
           jQuery(function($) {
-          ajaxCart.init(ajaxCartConfig);
+          // ajaxCart.init(ajaxCartConfig);
         });
       
         function loadmore() {
@@ -255,7 +255,7 @@
                   moneyFormat: null
                 };
                   jQuery(function($) {
-                  ajaxCart.init(ajaxCartConfig);
+                  // ajaxCart.init(ajaxCartConfig);
                 });
 
                 $('.loading.tshopify-popup').removeClass('active');
