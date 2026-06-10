@@ -11,6 +11,39 @@
   "name": "Header",
   "type": "header",
   "sections": {
+    "announcement_bar_6tG97b": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_tfXdNX": {
+          "type": "announcement",
+          "settings": {
+            "richtext": "<p>Ganhe 10% OFF na primeira compra com o cupom: <strong>GAROTA10</strong></p>",
+            "show_link": false,
+            "link_text": "Saiba mais",
+            "link_url": "",
+            "link_bg_color": "#ffffff",
+            "link_text_color": "#000000",
+            "link_border_radius": 4,
+            "link_hover_bg": "#e0e0e0",
+            "link_hover_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_tfXdNX"
+      ],
+      "name": "Barra de Anúncios",
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "font_size_desktop": 14,
+        "font_size_mobile": 12,
+        "padding_top_desktop": 10,
+        "padding_bottom_desktop": 10,
+        "padding_top_mobile": 8,
+        "padding_bottom_mobile": 8
+      }
+    },
     "main-header": {
       "type": "main-header",
       "settings": {
@@ -37,6 +70,7 @@
     }
   },
   "order": [
+    "announcement_bar_6tG97b",
     "main-header"
   ]
 }

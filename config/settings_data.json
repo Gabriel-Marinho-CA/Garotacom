@@ -15,7 +15,7 @@
     "default_currency": "USD",
     "bg_color_body": "#ffffff",
     "bg_image_body": "",
-    "enable_promo_topbar": true,
+    "enable_promo_topbar": false,
     "background_promo": "shopify://shop_images/bg_garotacom_4x-8.png",
     "color_content_promo_topbar": "#ffffff",
     "content_promo_topbar": "Ganhe 10% OFF na primeira compra com o cupom: GAROTA10",
