@@ -46,6 +46,24 @@
     },
     "main-header": {
       "type": "main-header",
+      "blocks": {
+        "banner_menus_6fKJjB": {
+          "type": "banner_menus",
+          "settings": {
+            "banner_menu": "shopify://shop_images/2_ae782287-9974-46bc-9caa-6c5b20527b6f.png"
+          }
+        },
+        "banner_menus_HAMyVL": {
+          "type": "banner_menus",
+          "settings": {
+            "banner_menu": "shopify://shop_images/DSC04230.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "banner_menus_6fKJjB",
+        "banner_menus_HAMyVL"
+      ],
       "settings": {
         "select_layout": "v3",
         "hd_logo": "shopify://shop_images/Prancheta_5.png",
