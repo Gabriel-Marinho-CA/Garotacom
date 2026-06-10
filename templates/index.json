@@ -9,16 +9,16 @@
  */
 {
   "sections": {
-    "d09e5f98-400f-41a4-855f-24d4e43a68df": {
-      "type": "section-slideshow-v1",
+    "section_slideshow_main_R4UYVU": {
+      "type": "section-slideshow-main",
       "blocks": {
-        "template--14437059264547__d09e5f98-400f-41a4-855f-24d4e43a68df-16673799369ea6d8e4-0": {
+        "slideshow_Yb834h": {
           "type": "slideshow",
           "settings": {
             "select_position_content": "left",
             "select_textalign_content": "left",
             "block_title_top1": "",
-            "color_block_title_top1": "#010101",
+            "color_block_title_top1": "#E5E5E5",
             "font_size_top1": 18,
             "fonts_sub_1": "",
             "effect_title1": "bounce",
@@ -28,28 +28,60 @@
             "fonts_title_top": "",
             "effect_title": "bounce",
             "block_title_top2": "",
-            "color_block_title_top2": "#000000",
+            "color_block_title_top2": "#E5E5E5",
             "font_size_top2": 20,
             "fonts_sub_2": "",
             "effect_title2": "bounce",
             "block_buton": "",
-            "color_block_button": "#000000",
+            "color_block_button": "#fff",
             "font_size_button": 14,
             "fonts_button": "",
-            "color_hover_button": "#000000",
-            "color_hover_text": "#ffffff",
+            "color_hover_button": "#fff",
+            "color_hover_text": "#000",
             "block_url": "shopify://collections/all",
             "effect_title3": "bounce",
-            "ena_slide_video": false,
-            "url_ytb_video": "",
+            "block_banerimage": "shopify://shop_images/3.jpg",
+            "block_banerimage_mb": "shopify://shop_images/2_ae782287-9974-46bc-9caa-6c5b20527b6f.png"
+          }
+        },
+        "slideshow_gfEr8z": {
+          "type": "slideshow",
+          "settings": {
+            "select_position_content": "left",
+            "select_textalign_content": "left",
+            "block_title_top1": "",
+            "color_block_title_top1": "#E5E5E5",
+            "font_size_top1": 18,
+            "fonts_sub_1": "",
+            "effect_title1": "bounce",
+            "block_title_top": "",
+            "color_block_title_top": "#010101",
+            "font_size_title_top": 80,
+            "fonts_title_top": "",
+            "effect_title": "bounce",
+            "block_title_top2": "",
+            "color_block_title_top2": "#E5E5E5",
+            "font_size_top2": 20,
+            "fonts_sub_2": "",
+            "effect_title2": "bounce",
+            "block_buton": "",
+            "color_block_button": "#fff",
+            "font_size_button": 14,
+            "fonts_button": "",
+            "color_hover_button": "#fff",
+            "color_hover_text": "#000",
+            "block_url": "shopify://collections/all",
+            "effect_title3": "bounce",
             "block_banerimage": "shopify://shop_images/3.jpg",
             "block_banerimage_mb": "shopify://shop_images/2_ae782287-9974-46bc-9caa-6c5b20527b6f.png"
           }
         }
       },
       "block_order": [
-        "template--14437059264547__d09e5f98-400f-41a4-855f-24d4e43a68df-16673799369ea6d8e4-0"
+        "slideshow_Yb834h",
+        "slideshow_gfEr8z"
       ],
+      "name": "SLIDESHOW - [R]",
       "settings": {
         "margin_top": "",
         "margin_bottom": ""
@@ -207,7 +239,7 @@
     }
   },
   "order": [
-    "d09e5f98-400f-41a4-855f-24d4e43a68df",
+    "section_slideshow_main_R4UYVU",
     "section_product_v1_t6zLnm",
     "section_service_v1_DTFWUe",
     "6a76bcfa-1690-4933-a426-c63f31f38ee6",
