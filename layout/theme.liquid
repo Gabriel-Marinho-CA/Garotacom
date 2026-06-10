@@ -482,7 +482,7 @@ p#shipping-rates-feedback-2 {
   {% if settings.ajax_cart_method == "drawer" %}
   <script src="{{ 'handlebars.min.js' | asset_url }}" type="text/javascript" defer></script>
   {% include 'ajax-cart-template' %}
-  <script src="{{ 'ajax-cart.js' | asset_url }}" type="text/javascript" defer></script>
+  <script src="{{ 'ajax-cart-v2.js' | asset_url }}" type="text/javascript" defer></script>
   <script>
     var ajaxCartConfig = {
       cartContainer: '.enj-minicart-ajax',
