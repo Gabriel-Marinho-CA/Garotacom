@@ -47,6 +47,7 @@ ShopifyAPI.updateCartNote = function(note, callback) {
     success: function(cart) {
       if ((typeof callback) === 'function') {
         callback(cart);
+         console.log("updated")
       }
       else {
         ShopifyAPI.onCartUpdate(cart);
@@ -80,6 +81,7 @@ ShopifyAPI.addItemFromForm = function(form, callback, errorCallback) {
     success: function(line_item) {
       if ((typeof callback) === 'function') {
         callback(line_item, form);
+        console.log("added")
       }
       else {
         ShopifyAPI.onItemAdded(line_item, form);
@@ -119,6 +121,7 @@ ShopifyAPI.changeItem = function(line, quantity, callback) {
     success: function(cart) {
       if ((typeof callback) === 'function') {
         callback(cart);
+         console.log("changed")
       }
       else {
         ShopifyAPI.onCartUpdate(cart);
@@ -205,10 +208,12 @@ var ajaxCart = (function(module, $) {
   updateCountPrice = function (cart) {
     if ($cartCountSelector) {
       $cartCountSelector.html(cart.item_count).removeClass('hidden-count');
-      $('.product-popup').find('.product-item-count').html(cart.item_count);  
+      $('.product-popup').find('.product-item-count').html(cart.item_count);
       if (cart.item_count === 0) {
         $cartCountSelector.addClass('hidden-count');
-        $('.js-number-cart').removeClass('active');
+        $('.js-number-cart').html(0).removeClass('active');
+      } else {
+        $('.js-number-cart').html(cart.item_count).addClass('active');
       }
     }
     if ($cartCostSelector) {
@@ -277,7 +282,6 @@ var ajaxCart = (function(module, $) {
       .append('<p>' + "" + '</p>');
       cartCallback(cart);
       return;
-      $('.js-number-cart').removeClass('active');
     }
 
     // Handlebars.js cart layout
