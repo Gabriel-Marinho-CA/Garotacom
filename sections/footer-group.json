@@ -8,8 +8,60 @@
  * ------------------------------------------------------------
  */
 {
-  "name": "footer-group",
-  "type": "header",
-  "sections": {},
-  "order": []
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "main-footer": {
+      "type": "main-footer",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "description": "Sua loja de moda favorita.",
+            "logo_maxwidth": 160
+          }
+        },
+        "links-1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Institucional",
+            "menu": "footer"
+          }
+        },
+        "links-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Atendimento",
+            "menu": "footer"
+          }
+        },
+        "links-3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Informações",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter",
+        "links-1",
+        "links-2",
+        "links-3"
+      ],
+      "settings": {
+        "bg_color": "#1a1a1a",
+        "text_color": "#ffffff",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "show_bottom_bar": true,
+        "copyright_text": "© 2025 Garota.com. Todos os direitos reservados."
+      }
+    }
+  },
+  "order": [
+    "main-footer"
+  ]
 }
