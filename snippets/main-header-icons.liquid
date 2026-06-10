@@ -10,7 +10,7 @@
       </a>
     </li>
     <li class="list-inline-item mr-0">
-      <a href="{% if customer %}/account{% else %}javascript:void(0){% endif %}" class="login {% unless customer %}js-call-popup-login{% endunless %}">
+      <a href="{% if customer %}/account{% else %}/customer_authentication/redirect?locale=pt-BR&region_country=BR{% endif %}" class="login {% unless customer %}{% endunless %}">
         {% if section.settings.hd_icon_login_svg != blank %}
         {{ section.settings.hd_icon_login_svg }}
         {% else %}
