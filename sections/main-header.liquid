@@ -1,16 +1,14 @@
 <!-- /sections/main-header.liquid -->
 
-{% assign hd_class = 'main-header-wrap' %}
-
-{% if section.settings.select_layout == 'v5' or section.settings.select_layout == 'v6' %}
+{% if section.settings.select_hds == 'v5' or section.settings.select_hds == 'v6' %}
   {% include 'eveland-horizon-menu' %}
 {% endif %}
 
-<header id="header" class="{{ hd_class }} layout-{{ section.settings.select_layout }} js_height_hd jsheader_sticky d-none d-xl-block {% if section.settings.hd_enable_transparent %}header-absolute{% endif %}">
+<header id="header" class="main-header-wrap layout-{{ section.settings.select_hds }} js_height_hd jsheader_sticky d-none d-xl-block {% if section.settings.hd_home_enable_transparents %}header-absolute{% endif %}">
   <div class="container container-v1">
     <div class="row align-items-center">
 
-      {% if section.settings.select_layout == 'v1' %}
+      {% if section.settings.select_hds == 'v1' %}
         {%- comment -%} v1: Logo left | Menu center | Icons right {%- endcomment -%}
         <div class="col-lg-2 p-0">
           {% include 'main-header-logo' %}
@@ -22,7 +20,7 @@
           {% include 'main-header-icons' %}
         </div>
 
-      {% elsif section.settings.select_layout == 'v2' %}
+      {% elsif section.settings.select_hds == 'v2' %}
         {%- comment -%} v2: Menu left | Logo center | Icons right {%- endcomment -%}
         <div class="col-lg-5 p-0">
           <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">{% include 'eveland-menu' %}</div>
@@ -34,7 +32,7 @@
           {% include 'main-header-icons' %}
         </div>
 
-      {% elsif section.settings.select_layout == 'v3' %}
+      {% elsif section.settings.select_hds == 'v3' %}
         {%- comment -%} v3: Logo left | Menu left-aligned | Icons right {%- endcomment -%}
         <div class="col-lg-2">
           {% include 'main-header-logo' %}
@@ -46,7 +44,7 @@
           {% include 'main-header-icons' %}
         </div>
 
-      {% elsif section.settings.select_layout == 'v4' %}
+      {% elsif section.settings.select_hds == 'v4' %}
         {%- comment -%} v4: Logo left | Menu right-aligned | Icons right {%- endcomment -%}
         <div class="col-lg-2">
           {% include 'main-header-logo' %}
@@ -58,7 +56,7 @@
           {% include 'main-header-icons' %}
         </div>
 
-      {% elsif section.settings.select_layout == 'v5' %}
+      {% elsif section.settings.select_hds == 'v5' %}
         {%- comment -%} v5: Hamburger left | Logo center | Icons right {%- endcomment -%}
         <div class="col-lg-5">
           <div class="menu {% if settings.enable_rtl_mode %}right{% else %}left{% endif %}">
@@ -77,7 +75,7 @@
           {% include 'main-header-icons' %}
         </div>
 
-      {% elsif section.settings.select_layout == 'v6' %}
+      {% elsif section.settings.select_hds == 'v6' %}
         {%- comment -%} v6: Logo left | Icons + Hamburger right {%- endcomment -%}
         <div class="col-lg-6 left">
           {% include 'main-header-logo' %}
@@ -106,17 +104,16 @@
       } : null;
     }
 
-    var bgHex = "{{ section.settings.hd_bg_color }}";
-    var opacity = {{ section.settings.hd_bg_opacity }};
-    var rgb = hexToRgb(bgHex);
+    var rgb = hexToRgb("{{ section.settings.hd_home_bg_header_normal }}");
+    var opacity = {{ section.settings.hd_bg_header_opacity }};
 
-    {% unless section.settings.hd_enable_transparent %}
+    {% unless section.settings.hd_home_enable_transparents %}
     if (rgb) {
       $('.main-header-wrap').css({'background': 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'});
     }
     {% endunless %}
 
-    {% if section.settings.hd_enable_sticky %}
+    {% if section.settings.enable_sticky_hd_home %}
     (function stickyScroll() {
       var $nav = $(".jsheader_sticky");
       $nav.removeClass('menu_scroll_main');
@@ -125,7 +122,7 @@
         if (rgb) {
           $('.main-header-wrap.menu_scroll_main').css({'background': 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')'});
         }
-        {% if section.settings.hd_enable_transparent %}
+        {% if section.settings.hd_home_enable_transparents %}
         if ($(this).scrollTop() < $nav.height()) {
           $('.main-header-wrap').css({'background': 'none'});
           $nav.removeClass('menu_scroll_main');
@@ -147,23 +144,23 @@
     font-size: 9px !important;
   }
   #header .menu ul li .nav-link {
-    color: {{ section.settings.hd_color_text }};
+    color: {{ section.settings.hd_home_color_text }};
   }
   #header .currencies-login .cart-login-search ul li a i {
-    color: {{ section.settings.hd_color_text }};
+    color: {{ section.settings.hd_home_color_text }};
   }
   #header .currencies-login .cart-login-search ul li a svg {
-    fill: {{ section.settings.hd_color_text }};
+    fill: {{ section.settings.hd_home_color_text }};
   }
   #header .currencies-login .cart-login-search ul li .cart .number-cart {
-    color: {{ section.settings.hd_color_text }};
+    color: {{ section.settings.hd_home_color_text }};
   }
-  {% if section.settings.select_layout == 'v5' or section.settings.select_layout == 'v6' %}
+  {% if section.settings.select_hds == 'v5' or section.settings.select_hds == 'v6' %}
   .main-header-wrap .model_menu {
-    color: {{ section.settings.hd_color_text }};
+    color: {{ section.settings.hd_home_color_text }};
   }
   .main-header-wrap .model_menu .model-menu-icon span {
-    background: {{ section.settings.hd_color_text }};
+    background: {{ section.settings.hd_home_color_text }};
   }
   {% endif %}
 </style>
@@ -175,7 +172,7 @@
   "settings": [
     {
       "type": "select",
-      "id": "select_layout",
+      "id": "select_hds",
       "label": "Layout",
       "options": [
         { "value": "v1", "label": "v1 — Logo | Menu | Icons" },
@@ -193,13 +190,13 @@
     },
     {
       "type": "image_picker",
-      "id": "hd_logo",
+      "id": "hd_home_logo",
       "label": "Logo Image",
       "info": "140 x 46px .png recomendado"
     },
     {
       "type": "range",
-      "id": "hd_logo_maxwidth",
+      "id": "hd_home_logo_maxwidth",
       "min": 35,
       "max": 300,
       "step": 5,
@@ -209,34 +206,34 @@
     },
     {
       "type": "textarea",
-      "id": "hd_logo_svg",
+      "id": "hd_home_logo_svg",
       "label": "Logo SVG (opcional)"
     },
     {
       "type": "header",
-      "content": "Cores & Fundo"
+      "content": "Cores e Fundo"
     },
     {
       "type": "color",
-      "id": "hd_color_text",
+      "id": "hd_home_color_text",
       "label": "Cor dos textos e ícones",
       "default": "#ffffff"
     },
     {
       "type": "checkbox",
-      "id": "hd_enable_transparent",
+      "id": "hd_home_enable_transparents",
       "label": "Header transparente",
       "default": true
     },
     {
       "type": "color",
-      "id": "hd_bg_color",
+      "id": "hd_home_bg_header_normal",
       "label": "Cor de fundo",
       "default": "#000000"
     },
     {
       "type": "range",
-      "id": "hd_bg_opacity",
+      "id": "hd_bg_header_opacity",
       "min": 0.1,
       "max": 1,
       "step": 0.1,
@@ -249,7 +246,7 @@
     },
     {
       "type": "checkbox",
-      "id": "hd_enable_sticky",
+      "id": "enable_sticky_hd_home",
       "label": "Habilitar Sticky",
       "default": true
     },
