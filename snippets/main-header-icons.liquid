@@ -28,14 +28,14 @@
       </a>
     </li>
     <li class="list-inline-item mr-0">
-      <a href="javascript:void(0)" class="cart js-call-minicart js-call-minicart">
+      <button class="cart js-call-minicart js-call-minicart">
         {% if section.settings.hd_icon_cart_svg != blank %}
         {{ section.settings.hd_icon_cart_svg }}
         {% else %}
         <i class="{{ section.settings.hd_icon_cart }}"></i>
         {% endif %}
         <span class="js-number-cart number-cart {% if cart.item_count > 0 %}active{% endif %}"></span>
-      </a>
+      </button>
     </li>
   </ul>
 </div>
