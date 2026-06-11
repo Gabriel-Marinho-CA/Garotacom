@@ -1,0 +1,402 @@
+{% if section.settings.enabled %}
+<div id="popup-newsletter-overlay-{{ section.id }}" class="popup-newsletter-overlay" aria-hidden="true">
+  <div id="popup-newsletter-modal-{{ section.id }}" class="popup-newsletter-modal" role="dialog" aria-modal="true">
+
+    <button class="popup-newsletter-close" id="popup-newsletter-close-{{ section.id }}" aria-label="Fechar">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1" y1="1" x2="17" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="17" y1="1" x2="1" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    {% if section.settings.image != blank %}
+    <div class="popup-newsletter-image">
+      <img
+        src="{{ section.settings.image | image_url: width: 800 }}"
+        alt="{{ section.settings.image.alt | default: 'Newsletter' }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="lazy"
+      >
+    </div>
+    {% endif %}
+
+    <div class="popup-newsletter-body">
+
+      {% if section.settings.title != blank %}
+      <div class="popup-newsletter-title">
+        {{ section.settings.title }}
+      </div>
+      {% endif %}
+
+      {% if settings.newsletter_form_action != blank %}
+        {% assign form_action = settings.newsletter_form_action %}
+      {% else %}
+        {% assign form_action = '#' %}
+      {% endif %}
+
+      <form class="popup-newsletter-form" action="{{ form_action }}" method="post" id="popup-newsletter-form-{{ section.id }}">
+        <input
+          type="text"
+          name="FNAME"
+          class="popup-newsletter-input"
+          placeholder="{{ section.settings.placeholder_name | default: 'First Name' }}"
+          autocomplete="given-name"
+        >
+        <input
+          type="email"
+          name="EMAIL"
+          class="popup-newsletter-input"
+          placeholder="{{ section.settings.placeholder_email | default: 'Email Address' }}"
+          required
+          autocomplete="email"
+        >
+        <button type="submit" class="popup-newsletter-btn">
+          {{ section.settings.button_label | default: 'SUBSCRIBE >' }}
+        </button>
+      </form>
+
+      {% if section.settings.aux_text != blank %}
+      <div class="popup-newsletter-aux">
+        {{ section.settings.aux_text }}
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .popup-newsletter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .popup-newsletter-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .popup-newsletter-modal {
+    position: relative;
+    background: {{ section.settings.bg_color }};
+    width: 100%;
+    max-width: {{ section.settings.modal_max_width }}px;
+    margin: 16px;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+    transform: translateY(24px);
+    transition: transform 0.35s ease;
+  }
+  .popup-newsletter-overlay.is-visible .popup-newsletter-modal {
+    transform: translateY(0);
+  }
+  .popup-newsletter-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: {{ section.settings.close_color }};
+    z-index: 2;
+    line-height: 1;
+    padding: 4px;
+  }
+  .popup-newsletter-close:hover {
+    opacity: 0.7;
+  }
+  .popup-newsletter-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: {{ section.settings.image_max_height }}px;
+    object-fit: cover;
+  }
+  .popup-newsletter-body {
+    padding: {{ section.settings.body_padding }}px;
+    text-align: center;
+  }
+  .popup-newsletter-title {
+    margin-bottom: 20px;
+    color: {{ section.settings.title_color }};
+  }
+  .popup-newsletter-title * {
+    margin: 0;
+  }
+  .popup-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .popup-newsletter-input {
+    width: 100%;
+    border: 1px solid {{ section.settings.input_border_color }};
+    background: transparent;
+    padding: 12px 14px;
+    font-size: 14px;
+    outline: none;
+    border-radius: 2px;
+    color: {{ section.settings.title_color }};
+  }
+  .popup-newsletter-input::placeholder {
+    color: #999;
+  }
+  .popup-newsletter-input:focus {
+    border-color: {{ section.settings.title_color }};
+  }
+  .popup-newsletter-btn {
+    width: 100%;
+    background: {{ section.settings.btn_bg }};
+    color: {{ section.settings.btn_color }};
+    border: none;
+    padding: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    border-radius: 2px;
+  }
+  .popup-newsletter-btn:hover {
+    opacity: 0.85;
+  }
+  .popup-newsletter-aux {
+    margin-top: 14px;
+    font-size: 11px;
+    color: #777;
+    line-height: 1.5;
+  }
+  .popup-newsletter-aux a {
+    color: inherit;
+    text-decoration: underline;
+  }
+  @media (max-width: 480px) {
+    .popup-newsletter-modal {
+      margin: 8px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'popup_newsletter_seen_{{ section.id }}';
+  var SCROLL_THRESHOLD = {{ section.settings.scroll_threshold }};
+  var overlay = document.getElementById('popup-newsletter-overlay-{{ section.id }}');
+  var closeBtn = document.getElementById('popup-newsletter-close-{{ section.id }}');
+
+  if (!overlay) return;
+
+  function closePopup() {
+    overlay.classList.remove('is-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+  }
+
+  function openPopup() {
+    overlay.classList.add('is-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function hasBeenSeen() {
+    try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch(e) { return false; }
+  }
+
+  if (hasBeenSeen()) return;
+
+  var triggered = false;
+  function onScroll() {
+    if (triggered) return;
+    var scrolled = window.scrollY || window.pageYOffset;
+    if (scrolled >= SCROLL_THRESHOLD) {
+      triggered = true;
+      window.removeEventListener('scroll', onScroll);
+      openPopup();
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  closeBtn.addEventListener('click', closePopup);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-visible')) closePopup();
+  });
+
+  var form = document.getElementById('popup-newsletter-form-{{ section.id }}');
+  if (form) {
+    form.addEventListener('submit', function() {
+      setTimeout(closePopup, 300);
+    });
+  }
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Popup Newsletter",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Ativar popup",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "scroll_threshold",
+      "label": "Scroll para ativar (px)",
+      "min": 50,
+      "max": 800,
+      "step": 50,
+      "default": 200,
+      "info": "Quantidade de pixels rolados antes do popup aparecer"
+    },
+    {
+      "type": "header",
+      "content": "Imagem"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem do popup"
+    },
+    {
+      "type": "range",
+      "id": "image_max_height",
+      "label": "Altura maxima da imagem (px)",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "default": 260
+    },
+    {
+      "type": "header",
+      "content": "Conteudo"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Titulo",
+      "default": "<p><strong>UNLOCK YOUR</strong></p><p><strong>15% OFF DISCOUNT</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_name",
+      "label": "Placeholder - Nome",
+      "default": "First Name"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_email",
+      "label": "Placeholder - Email",
+      "default": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botao",
+      "default": "SUBSCRIBE >"
+    },
+    {
+      "type": "richtext",
+      "id": "aux_text",
+      "label": "Texto auxiliar (abaixo do botao)",
+      "default": "<p>By entering your email address, you agree to receive promotional emails. View our <a href=\"/policies/privacy-policy\">Privacy Policy</a> & <a href=\"/policies/terms-of-service\">Terms</a>.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Aparencia"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fundo do popup",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do texto",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Cor da borda dos inputs",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Fundo do botao",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Cor do texto do botao",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "close_color",
+      "label": "Cor do botao fechar (X)",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacidade do overlay (%)",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width",
+      "label": "Largura maxima do popup (px)",
+      "min": 280,
+      "max": 700,
+      "step": 10,
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Arredondamento das bordas (px)",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "body_padding",
+      "label": "Padding interno (px)",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Popup Newsletter",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
