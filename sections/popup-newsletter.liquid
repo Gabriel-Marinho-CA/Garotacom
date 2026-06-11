@@ -121,14 +121,16 @@
   }
   .popup-newsletter-body {
     padding: {{ section.settings.body_padding }}px;
-    text-align: center;
+    text-align: {{ section.settings.text_align }};
   }
   .popup-newsletter-title {
     margin-bottom: 20px;
     color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size }}px;
   }
   .popup-newsletter-title * {
     margin: 0;
+    font-size: inherit;
   }
   .popup-newsletter-form {
     display: flex;
@@ -169,7 +171,7 @@
   }
   .popup-newsletter-aux {
     margin-top: 14px;
-    font-size: 11px;
+    font-size: {{ section.settings.aux_font_size }}px;
     color: #777;
     line-height: 1.5;
   }
@@ -180,6 +182,12 @@
   @media (max-width: 480px) {
     .popup-newsletter-modal {
       margin: 8px;
+    }
+    .popup-newsletter-title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+    }
+    .popup-newsletter-aux {
+      font-size: {{ section.settings.aux_font_size_mobile }}px;
     }
   }
 </style>
@@ -314,6 +322,57 @@
       "id": "aux_text",
       "label": "Texto auxiliar (abaixo do botao)",
       "default": "<p>By entering your email address, you agree to receive promotional emails. View our <a href=\"/policies/privacy-policy\">Privacy Policy</a> & <a href=\"/policies/terms-of-service\">Terms</a>.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tipografia"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alinhamento do texto",
+      "options": [
+        { "value": "left",   "label": "Esquerda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right",  "label": "Direita" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Titulo - Font size desktop (px)",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Titulo - Font size mobile (px)",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "aux_font_size",
+      "label": "Texto auxiliar - Font size desktop (px)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "aux_font_size_mobile",
+      "label": "Texto auxiliar - Font size mobile (px)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "default": 10
     },
     {
       "type": "header",
