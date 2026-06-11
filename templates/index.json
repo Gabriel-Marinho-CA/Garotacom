@@ -18,7 +18,7 @@
             "select_position_content": "left",
             "select_textalign_content": "left",
             "block_title_top1": "",
-            "color_block_title_top1": "#E5E5E5",
+            "color_block_title_top1": "#e5e5e5",
             "font_size_top1": 18,
             "fonts_sub_1": "",
             "effect_title1": "bounce",
@@ -28,7 +28,7 @@
             "fonts_title_top": "",
             "effect_title": "bounce",
             "block_title_top2": "",
-            "color_block_title_top2": "#E5E5E5",
+            "color_block_title_top2": "#e5e5e5",
             "font_size_top2": 20,
             "fonts_sub_2": "",
             "effect_title2": "bounce",
@@ -50,7 +50,7 @@
             "select_position_content": "left",
             "select_textalign_content": "left",
             "block_title_top1": "",
-            "color_block_title_top1": "#E5E5E5",
+            "color_block_title_top1": "#e5e5e5",
             "font_size_top1": 18,
             "fonts_sub_1": "",
             "effect_title1": "bounce",
@@ -60,7 +60,7 @@
             "fonts_title_top": "",
             "effect_title": "bounce",
             "block_title_top2": "",
-            "color_block_title_top2": "#E5E5E5",
+            "color_block_title_top2": "#e5e5e5",
             "font_size_top2": 20,
             "fonts_sub_2": "",
             "effect_title2": "bounce",
@@ -236,6 +236,31 @@
         "margin_top": "-100",
         "margin_bottom": "0"
       }
+    },
+    "popup_newsletter_fPCwxz": {
+      "type": "popup-newsletter",
+      "name": "Popup Newsletter",
+      "settings": {
+        "enabled": true,
+        "scroll_threshold": 200,
+        "image": "shopify://shop_images/Design_sem_nome_9.png",
+        "image_max_height": 260,
+        "title": "<p><strong>GARANTA DESCONTO</strong></p><p><strong>DE 15% OFF</strong></p>",
+        "placeholder_name": "Nome",
+        "placeholder_email": "Email",
+        "button_label": "Cadastrar-se",
+        "aux_text": "<p>By entering your email address, you agree to receive promotional emails. View our <a href=\"/policies/privacy-policy\">Privacy Policy</a> & <a href=\"/policies/terms-of-service\">Terms</a>.</p>",
+        "bg_color": "#ffffff",
+        "title_color": "#111111",
+        "input_border_color": "#cccccc",
+        "btn_bg": "#111111",
+        "btn_color": "#ffffff",
+        "close_color": "#111111",
+        "overlay_opacity": 55,
+        "modal_max_width": 420,
+        "border_radius": 4,
+        "body_padding": 32
+      }
     }
   },
   "order": [
@@ -244,6 +269,7 @@
     "section_service_v1_DTFWUe",
     "6a76bcfa-1690-4933-a426-c63f31f38ee6",
     "17553556662750d9e7",
-    "newsletter_contact_myd8zR"
+    "newsletter_contact_myd8zR",
+    "popup_newsletter_fPCwxz"
   ]
 }
