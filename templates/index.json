@@ -255,7 +255,7 @@
         "input_border_color": "#cccccc",
         "btn_bg": "#111111",
         "btn_color": "#ffffff",
-        "close_color": "#111111",
+        "close_color": "#ffffff",
         "overlay_opacity": 55,
         "modal_max_width": 420,
         "border_radius": 4,
